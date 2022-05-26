@@ -1,0 +1,11 @@
+.popup__close {
+    background: #ffffff;
+    background-image: url(/images/add-button.svg);
+    background-size: 35px 35px;
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    top: -35px;
+    right: -35px;
+    cursor: pointer;
+}
