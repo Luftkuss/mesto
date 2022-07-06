@@ -40,12 +40,3 @@ formElement.addEventListener('submit', submitForm);
 
 console.log(nameInput);
 console.log(profileName);
-
-/* console.log(editButton);
-console.log(popup);
-console.log(popupCloseButton);
-console.log(profileName);
-console.log(profileDescription);
-console.log(nameInput);
-console.log(descriptionInput);
-console.log(formElement); */

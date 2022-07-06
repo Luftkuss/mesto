@@ -6,6 +6,10 @@
     top: -35px;
     right: -35px;
     cursor: pointer;
+    background-color: rgba(28,28,28,0);
+    border: none;
+    margin: 0px;
+    padding: 0px;
 }
 
 @media screen and (max-width: 1279px) {

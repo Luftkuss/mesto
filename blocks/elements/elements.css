@@ -1,11 +1,5 @@
 .elements {
-    max-width: 880px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-column-gap: 17px;
-    grid-row-gap: 20px;
-    margin: 0px auto 0px;
-    padding-top: 50px;
+    
 }
 
 @media screen and (max-width: 1279px) {
@@ -17,15 +11,13 @@
 
 @media screen and (max-width: 879px) {
     .elements {
-        grid-template-columns: repeat(2, 1fr);
+        
        
     }
 } 
 
 @media screen and (max-width: 767px) {
     .elements {
-        grid-template-columns: 1fr;
-        justify-items: center;
-        padding-top: 36px; 
+        
     }
 } 
