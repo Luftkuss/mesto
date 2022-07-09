@@ -12,6 +12,14 @@
     line-height: 1.22;
     text-align: center;
     color: #FFFFFF;
+    opacity: 1;
+}
+
+.popup__button:hover {
+    background: #000000;
+    opacity: 0.8;
+    transition-property:opacity;
+    transition-duration: .2s;
 }
 
 @media screen and (max-width: 1279px) {

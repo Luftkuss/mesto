@@ -10,6 +10,14 @@
     border: none;
     margin: 0px;
     padding: 0px;
+    opacity: 1;
+}
+
+.popup__close:hover {
+    background: #FFFFFF;
+    opacity: 0.6;
+    transition-property:opacity;
+    transition-duration: .2s;
 }
 
 @media screen and (max-width: 1279px) {
