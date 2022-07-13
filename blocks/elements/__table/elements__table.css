@@ -26,6 +26,7 @@
     .elements__table {
         grid-template-columns: 1fr;
         justify-items: center;
+        padding: 0px;
         padding-top: 36px; 
     }
 } 

@@ -6,9 +6,7 @@
     line-height: 1.14;
     color: #FFFFFF;
     margin: 0px;
-
-    max-width: 294x;
-
+    max-width: 294px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
