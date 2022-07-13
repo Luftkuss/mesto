@@ -14,10 +14,10 @@
 }
 
 .popup__close:hover {
-    background: #FFFFFF;
+    background-image: url(../../../images/popup__close_active.svg);
     opacity: 0.6;
     transition-property:opacity;
-    transition-duration: .2s;
+    transition-duration: 0s;
 }
 
 @media screen and (max-width: 1279px) {

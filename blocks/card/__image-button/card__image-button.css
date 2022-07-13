@@ -5,3 +5,8 @@
     padding: 0px;
 
 }
+
+.card__image-buttone:hover {
+    opacity: 0.6;
+
+}

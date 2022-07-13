@@ -37,6 +37,3 @@ function submitForm(event) {
 };
 
 formElement.addEventListener('submit', submitForm);
-
-console.log(nameInput);
-console.log(profileName);
