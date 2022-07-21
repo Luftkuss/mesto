@@ -5,8 +5,8 @@ const popupCloseButton = document.querySelector('.popup__close');               
 const profileName = document.querySelector('.profile__title');                      // Имя 
 const profileDescription = document.querySelector('.profile__description');         // Описание
 
-const nameInput = document.querySelector('.popup__input_name');                     // Имя введение в форме
-const descriptionInput = document.querySelector('.popup__input_description');       // Описание введение в форме
+const nameInput = document.querySelector('.popup__input_type_name');                     // Имя введение в форме
+const descriptionInput = document.querySelector('.popup__input_type_description');       // Описание введение в форме
 
 const formElement = document.querySelector('.popup__form');                         // Форма
 
