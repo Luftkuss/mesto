@@ -1,4 +1,11 @@
 .popup__input {
     width: 358px;
     height: 27px;
+
+    font-family: 'Inter', 'Arial', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.2143;
+    color: #000000;
 }
