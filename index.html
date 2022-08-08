@@ -56,7 +56,7 @@
 
         <section class="elements">
             <ul class="elements__table">
-                <li class="card">
+                <!-- <li class="card">
                     
                     <img
                         src="./images/card__moscow.png"
@@ -173,7 +173,7 @@
                             class="card__image-like"
                         >
                     </div>
-                </li>
+                </li> -->
             </ul>
         </section>
     </main> 
@@ -221,14 +221,14 @@
     <template id="card-item">
         <li class="card">
                     
-            <img
+            <img id="card-link"
                 src="./images/card__sevastopol.png"
                 alt="севастополь"
                 class="card__image"
             >
             
             <div class="card__content-line">
-                <h2 class="card__title">${name}`</h2>
+                <h2 class="card__title" id="card-name">Севастополь</h2>
 
                 <img
                     src="./images/like_disabled.svg"
@@ -239,6 +239,7 @@
         </li>
     </template>
 
+    <script src="./sсripts/varibles.js" defer></script>
     <script src="./sсripts/index.js" defer></script>
 </body>
 </html>
