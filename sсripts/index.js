@@ -62,17 +62,18 @@ const initialCards = [
 
   function createCard({name, link}) {
     const cardElement = template.cloneNode(true); 
-    const cardsName = template.querySelector(varibles.cardsName);
-    const cardsLink = template.querySelector(varibles.cardsLink);
-    cardsName.textcontent = name;
+    const cardsName = cardElement.querySelector(varibles.cardsName);
+    const cardsLink = cardElement.querySelector(varibles.cardsLink);
+    cardsName.textContent = name;
     cardsLink.src = link;
     list.prepend(cardElement);
     return cardElement;
+    
   };
 
-
+  
   initialCards.forEach(createCard, () => {
-    console.log(item);
+    
     });
 
  
