@@ -4,9 +4,15 @@ const varibles = {
     popup: '.popup',
     popupEditProfile: '.popup_edit_profile', // Popup 1
     popupCloseButton: '.popup__close', // Закрытие попапа
+    popupClickCard: '.popup_click_card',
+    popupClickCardPhoto: '.popup_click_card__photo',
+    popupClickCardTitle: '.popup__title_cardseen',
 
     profileName: '.profile__title', // Имя
     profileDescription: '.profile__description', // Описание
+
+    cardNameForm: '.popup__input_type_name',
+    cardLinkForm: '.popup__input_type_description',
 
     nameInput: '.popup__input_type_name', // инпут имени
     cardInput: '.popup__input_type_name', // импут названия карточки
@@ -22,19 +28,33 @@ const varibles = {
     editCardButton: '.profile__add-button', // кнопка редактирования карточек
 
     closeCardButton: '.popup__close',
+    popupCloseCardContent: '.popup__close_card-content',
     
-    template:  '#card-item',
+    template: '#card-item',
+    tamplateCardPhoto: '#card-photo',
 
     list: '.elements__table',
     
     cardsName: '#card-name',
     cardsLink: '#card-link',
 
+    like: '.card__image-like',
+
+    trash: '.card__trash',
+
+    сardImage: '.card__image'
 }
+
+const  popupCloseCardContent = document.querySelector(varibles.popupCloseCardContent);
+const  popupClickCard = document.querySelector(varibles.popupClickCard);
+const  popupClickCardPhoto = document.querySelector(varibles.popupClickCardPhoto);
+const  popupClickCardTitle = document.querySelector(varibles.popupClickCardTitle);
+
+const  tamplateCardPhoto = document.querySelector(varibles.tamplateCardPhoto); // Нода попапа с фото
 
 
 const list = document.querySelector(varibles.list);
-const template = document.querySelector(varibles.template).content.children[0];
+const template = document.querySelector(varibles.template).content.children[0]; // Нода карточки
 
 const editButton = document.querySelector(varibles.editButton);                 // кнопка редактирвоания
 const popup = document.querySelector(varibles.popup);                                     // попап
@@ -59,5 +79,12 @@ const editCardButton = document.querySelector(varibles.editCardButton); // DOM �
 
 const closeCardButton = popupEditCard.querySelector(varibles.closeCardButton);
 
+const cardNameForm = popupEditCard.querySelector(varibles.cardNameForm);
+const cardLinkForm = popupEditCard.querySelector(varibles.cardLinkForm);
 
+const like = template.querySelector(varibles.like);
+
+const trash = template.querySelector(varibles.trash);
+
+const  cardsLink = template.querySelector(varibles.cardsLink);
 

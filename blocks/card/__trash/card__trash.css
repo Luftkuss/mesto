@@ -1,0 +1,11 @@
+.card__trash {
+    display: flex;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.card__trash:hover  {
+    cursor: pointer;
+    opacity: .5;
+ }

@@ -1,0 +1,4 @@
+.popup__content-line {
+    display: flex;
+    flex-direction: column;
+};

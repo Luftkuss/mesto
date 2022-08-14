@@ -1,4 +1,7 @@
 .card {
+    display: flex;
+    position: relative;
+    flex-direction: column;
     background-color: #fff;
     border-radius: 10px;
     max-width: 282px;

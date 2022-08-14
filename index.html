@@ -56,130 +56,13 @@
 
         <section class="elements">
             <ul class="elements__table">
-                <!-- <li class="card">
-                    
-                    <img
-                        src="./images/card__moscow.png"
-                        alt="москва моссельпром"
-                        class="card__image"
-                    >
-                    
-                    <div class="card__content-line">
-                        <h2 class="card__title">Москва</h2>
-                    
-                        <button class="card__image-button">
-                            <img
-                            src="./images/like_disabled.svg"
-                            alt="лайк"
-                            class="card__image-like">
-                        </button>
-                    </div>
-                </li>
-
-                <li class="card">
-                    
-                    <img
-                        src="./images/card__kharkiv.png"
-                        alt="харьков"
-                        class="card__image"
-                    >
-                    
-                    <div class="card__content-line">
-                        <h2 class="card__title">Харьков</h2>
-
-                        <button class="card__image-button">
-                            <img
-                            src="./images/like_disabled.svg"
-                            alt="лайк"
-                            class="card__image-like">
-                        </button>
-                    </div>
-                </li>
-
-                <li class="card">
-                    
-                    <img
-                        src="./images/card__baku.png"
-                        alt="баку"
-                        class="card__image"
-                    >
-                    
-                    <div class="card__content-line">
-                        <h2 class="card__title">Баку</h2>
-
-                        <button class="card__image-button">
-                            <img
-                            src="./images/like_disabled.svg"
-                            alt="лайк"
-                            class="card__image-like">
-                        </button>
-                    </div>
-                </li>
-
-                <li class="card">
-                    
-                    <img
-                        src="./images/card__minsk.png"
-                        alt="минск"
-                        class="card__image"
-                    >
-                    
-                    <div class="card__content-line">
-                        <h2 class="card__title">Минск</h2>
-
-                        <button class="card__image-button">
-                            <img
-                            src="./images/like_disabled.svg"
-                            alt="лайк"
-                            class="card__image-like">
-                        </button>
-                    </div>
-                </li>
-
-                <li class="card">
-                    
-                    <img
-                        src="./images/card__sverdlovsk.png"
-                        alt="свердловск екатеренбург"
-                        class="card__image"
-                    >
-                    
-                    <div class="card__content-line">
-                        <h2 class="card__title">Свердловск</h2>
-
-                        <button class="card__image-button">
-                            <img
-                            src="./images/like_disabled.svg"
-                            alt="лайк"
-                            class="card__image-like">
-                        </button>
-                    </div>
-                </li>
-
-                <li class="card">
-                    
-                    <img
-                        src="./images/card__sevastopol.png"
-                        alt="севастополь"
-                        class="card__image"
-                    >
-                    
-                    <div class="card__content-line">
-                        <h2 class="card__title">Севастополь</h2>
-
-                        <img
-                            src="./images/like_disabled.svg"
-                            alt="лайк"
-                            class="card__image-like"
-                        >
-                    </div>
-                </li> -->
+                
             </ul>
         </section>
     </main> 
 
     <footer class="footer">
-        <p class="footer__text">&copy; 2020 Mesto Russia</p>
+        <p class="footer__text">&copy; 2022 Mesto Russia</p>
     </footer>
 
     <div class="popup popup_edit_profile">
@@ -206,22 +89,32 @@
         </div>
     </div>
 
-    <div class="popup popup_edit_content">
-        <div class="popup__content">
-            <button class="popup__close"></button>
-            <h3 class="popup__title">Редактировать профиль</h3>
-            <form action="./" class="popup__form">
-                <input name="Имя" type="text" class="popup__input popup__input_type_name" placeholder="Имя">
-                <input name="Описание" type="text" class="popup__input popup__input_type_description" placeholder="Описание">
-                <button type="submit" class="popup__button">Сохранить</button>
-            </form>
+    <div class="popup popup_click_card">
+        <div class="popup__content_photo">
+                <button class="popup__close popup__close_card-content"></button>
+                <div class="popup__content-line">
+                    <img
+                        id="card-photo"
+                        src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg"
+                        alt="архыз"
+                        class="popup_click_card__photo"
+                    >
+                    <h3 class="popup__title popup__title_cardseen">Архыз</h3>
+                </div>
         </div>
     </div>
 
     <template id="card-item">
         <li class="card">
+
+            <img 
+                src="./images/Trash.svg"
+                alt="удалить"
+                class="card__trash"
+            >
                     
-            <img id="card-link"
+            <img 
+                id="card-link"
                 src="./images/card__sevastopol.png"
                 alt="севастополь"
                 class="card__image"
@@ -232,6 +125,7 @@
 
                 <img
                     src="./images/like_disabled.svg"
+                    
                     alt="лайк"
                     class="card__image-like"
                 >
@@ -241,5 +135,6 @@
 
     <script src="./sсripts/varibles.js" defer></script>
     <script src="./sсripts/index.js" defer></script>
+    
 </body>
 </html>
