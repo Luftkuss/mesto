@@ -1,11 +1,11 @@
-.popup_click_card__photo {
+.popup__click-photo {
     opacity: 1;
     max-width: 75vw;
     max-height: 75vh;
 }
 
 @media screen and (max-width: 767px) {
-    .popup_click_card__photo {
+    .popup__click-photo {
         width: 282px;
     }
 }

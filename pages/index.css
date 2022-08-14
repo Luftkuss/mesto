@@ -47,5 +47,5 @@
 @import url(../blocks/popup/__title/_cardseen/popup__title_cardseen.css);
 @import url(../blocks/popup/__content-line/popup__content-line.css);
 @import url(../blocks/popup/_click/_card/popup_click_card.css);
-@import url(../blocks/popup/_click/_card/__photo/popup_click_card__photo.css);
+@import url(../blocks/popup/__click-photo/popup__click-photo.css);
 @import url(../blocks/popup/__content/_photo/popup__content_photo.css);

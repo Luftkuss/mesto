@@ -5,7 +5,7 @@ const varibles = {
     popupEditProfile: '.popup_edit_profile', // Popup 1
     popupCloseButton: '.popup__close', // Закрытие попапа
     popupClickCard: '.popup_click_card',
-    popupClickCardPhoto: '.popup_click_card__photo',
+    popupClickCardPhoto: '.popup__click-photo',
     popupClickCardTitle: '.popup__title_cardseen',
 
     profileName: '.profile__title', // Имя
