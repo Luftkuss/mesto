@@ -1,6 +1,6 @@
 const variables = {
     editionButton: '.profile__edit-button', // Кнопка редактирвоания
-
+    popup: '.popup', 
     
     popupEditProfile: '.popup_edit_profile', // Popup 1
     popupCloseButton: '.popup__close', // Закрытие попапа
@@ -83,5 +83,7 @@ const cardLinkForm = popupEditCard.querySelector(variables.cardLinkForm);
 
 const trashIcon = template.querySelector(variables.trash);
 
-const  cardsLink = template.querySelector(variables.cardsLink);
+const cardsLink = template.querySelector(variables.cardsLink);
+
+const popup = document.querySelector(variables.popup);
 

@@ -38,6 +38,8 @@ function createCard({name, link}) {
   return cardElement
 };
 
+
+
 function insertCard(card){ // Универсальная функция добавления карточки
   list.prepend(card);
 }
@@ -63,7 +65,7 @@ cardButtonClose.addEventListener('click', function(){ //закрытие поп�
   event.preventDefault();
   nameForm = cardNameForm.value;
   linkForm = cardLinkForm.value;
-  createCard({name: nameForm, link: linkForm});
+  assembleCard({name: nameForm, link: linkForm});
   changePopupCondition(popupEditCard);
 };
 
@@ -94,10 +96,3 @@ function addPictureOpenerEventListener(openElement, openElementTitle){
 popupCloseCardContent.addEventListener('click', function(){ //закрытие попапа редактирования профиля эвент
   changePopupCondition(popupClickCard);
 });  
-
-// function removeCard(removeElement){
-//   removeElement.addEventListener('click', () => {
-//     removeElement.parentNode.remove();
-//   });
-// }
-// openElement.parentNode.querySelector('.card__title').textContent
