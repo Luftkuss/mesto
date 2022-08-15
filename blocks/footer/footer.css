@@ -4,20 +4,6 @@
     padding: 66px 0px 60px;
 }
 
-@media screen and (max-width: 1279px) {
-    .footer {
-        
-        
-    }
-} 
-
-@media screen and (max-width: 879px) {
-    .footer {
-        
-       
-    }
-} 
-
 @media screen and (max-width: 767px) {
     .footer {
         max-width: 282px;

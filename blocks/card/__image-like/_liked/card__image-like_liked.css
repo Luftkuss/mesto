@@ -1,0 +1,5 @@
+.card__image-like_liked {
+    background-image: url(../../../../images/like__liked.svg);
+    background-repeat: no-repeat;
+    background-position: 0px, 5px;
+}

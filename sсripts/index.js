@@ -1,22 +1,18 @@
 
 // Функции открытия и закрытия попапа
-function openPopup(popupElement) {  // функция открытия попапа + сохраненеия данных в атрибутах
-    popupElement.classList.add('popup__isOpen');
-    nameInput.value = profileName.textContent;
-    descriptionInput.value = profileDescription.textContent;
+function changePopupCondition(popupElement) {  // функция открытия попапа + сохраненеия данных в атрибутах
+    popupElement.classList.toggle('popup_is_open');
 }
 
-function closePopup(popupElement) { // функция закрытия попапа
-    popupElement.classList.remove('popup__isOpen');
-};
-
 // Попап 1
-editButton.addEventListener('click', function(){ //открытие попапа редактирования профиля эвент
-    openPopup(popupEditProfile);
+editionButton.addEventListener('click', function(){ //открытие попапа редактирования профиля эвент
+    nameInput.value = profileName.textContent;
+    descriptionInput.value = profileDescription.textContent;
+    changePopupCondition(popupEditProfile);
 });
 
 popupCloseButton.addEventListener('click', function(){ //закрытие попапа редактирования профиля эвент
-    closePopup(popupEditProfile);
+  changePopupCondition(popupEditProfile);
 });
 
 //
@@ -24,55 +20,43 @@ function submitForm(event) { // отправка формы при закрыт�
     event.preventDefault();
     profileName.textContent = nameInput.value;
     profileDescription.textContent = descriptionInput.value;
-    closePopup(popup);
+    changePopupCondition(popup);
 };
 
 formElement.addEventListener('submit', submitForm);
 
-// Массив карточек
+function createCard({name, link}) {
+  const cardElement = template.cloneNode(true); 
+  const cardsName = cardElement.querySelector(variables.cardsName);
+  const cardsLink = cardElement.querySelector(variables.cardsLink);
+  cardsName.textContent = name;
+  cardsLink.src = link;
+  cardsLink.alt = name;
+  likeFun(cardElement.querySelector(variables.like));
+  removeCard (cardElement.querySelector(variables.trash), cardElement);
+  addPictureOpenerEventListener(cardElement.querySelector(variables.cardsLink), name);
+  return cardElement
+};
 
-const initialCards = [
-    { name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'},
+function insertCard(card){ // Универсальная функция добавления карточки
+  list.prepend(card);
+}
 
-    { name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'},
+function assembleCard({name, link}){
+  insertCard(createCard({name, link}));
+};
 
-    { name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'},
 
-    { name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'},
-
-    { name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'},
-
-    { name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'},
-  ];
-
-  function createCard({name, link}) {
-    const cardElement = template.cloneNode(true); 
-    const cardsName = cardElement.querySelector(varibles.cardsName);
-    const cardsLink = cardElement.querySelector(varibles.cardsLink);
-    cardsName.textContent = name;
-    cardsLink.src = link;
-    list.prepend(cardElement);
-    likeFun (cardElement.querySelector(varibles.like));
-    removeCard (cardElement.querySelector(varibles.trash));
-    addPictureOpenerEventListener (cardElement.querySelector(varibles.cardsLink));
-  };
-
-  initialCards.forEach(createCard, () => { 
-    });
-
-    // Попап 2
-editCardButton.addEventListener('click', function(){ //открытие попапа редактирования карточек эвент
-  openPopup(popupEditCard);
+initialCards.forEach(assembleCard, () => { 
 });
 
-closeCardButton.addEventListener('click', function(){ //закрытие попапа редактирования профиля эвент
-  closePopup(popupEditCard);
+  // Попап 2
+editionCardButton.addEventListener('click', function(){ //открытие попапа редактирования карточек эвент
+  changePopupCondition(popupEditCard);
+});
+
+cardButtonClose.addEventListener('click', function(){ //закрытие попапа редактирования профиля эвент
+  changePopupCondition(popupEditCard);
 });  
 
  function addCard(event) { // Добавление карточки
@@ -80,45 +64,40 @@ closeCardButton.addEventListener('click', function(){ //закрытие поп�
   nameForm = cardNameForm.value;
   linkForm = cardLinkForm.value;
   createCard({name: nameForm, link: linkForm});
-  initialCards.push({name: nameForm, link: linkForm});
-  closePopup(popupEditCard);
+  changePopupCondition(popupEditCard);
 };
 
  popupEditCard.addEventListener('submit', addCard);
 
-function likeFun(likeElement){
-  likeElement.addEventListener('click', () => {
-    if (likeElement.classList.contains('liked')){
-      likeElement.classList.remove('liked');
-      likeElement.src = './images/like_disabled.svg';
-    }
-    else {
-      likeElement.classList.add('liked');
-      likeElement.src = './images/like__liked.svg';
-    }
+ function likeFun(likeElement){
+   likeElement.addEventListener('click', function (){
+    likeElement.classList.toggle('card__image-like_liked');
+    console.log(likeElement);
+   });
+ };
+
+function removeCard(trashIcon, cardElement){
+  trashIcon.addEventListener('click', () => {
+    cardElement.remove();
   });
 }
 
-function removeCard(removeElement){
-  removeElement.addEventListener('click', () => {
-    removeElement.parentNode.remove();
-  });
-}
-
-function addPictureOpenerEventListener(openElement){
+function addPictureOpenerEventListener(openElement, openElementTitle){
   openElement.addEventListener('click', () =>{
-    popupClickCard.classList.toggle('popup__isOpen');
+    popupClickCard.classList.toggle('popup_is_open');
     popupClickCardPhoto.src = openElement.src;
     popupClickCardPhoto.alt = openElement.alt;
-    popupClickCardTitle.textContent = openElement.parentNode.querySelector('.card__title').textContent;
+    popupClickCardTitle.textContent = openElementTitle;
   });
 };
 
-
-
-
-
-//.parentNode.querySelector(card__title).textContent
 popupCloseCardContent.addEventListener('click', function(){ //закрытие попапа редактирования профиля эвент
-  popupClickCard.classList.remove('popup__isOpen');
+  changePopupCondition(popupClickCard);
 });  
+
+// function removeCard(removeElement){
+//   removeElement.addEventListener('click', () => {
+//     removeElement.parentNode.remove();
+//   });
+// }
+// openElement.parentNode.querySelector('.card__title').textContent
