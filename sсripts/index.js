@@ -1,18 +1,22 @@
+function openPopup(popupElement) {  // функция открытия попапа
+    popupElement.classList.add('popup_is_open'); 
+  } 
 
-// Функции открытия и закрытия попапа
-function changePopupCondition(popupElement) {  // функция открытия попапа + сохраненеия данных в атрибутах
-    popupElement.classList.toggle('popup_is_open');
-}
+
+function closePopup(popupElement) { // функция закрытия попапа 
+  popupElement.classList.remove('popup_is_open'); 
+
+}; 
 
 // Попап 1
 editionButton.addEventListener('click', function(){ //открытие попапа редактирования профиля эвент
     nameInput.value = profileName.textContent;
     descriptionInput.value = profileDescription.textContent;
-    changePopupCondition(popupEditProfile);
+    openPopup(popupEditProfile);
 });
 
 popupCloseButton.addEventListener('click', function(){ //закрытие попапа редактирования профиля эвент
-  changePopupCondition(popupEditProfile);
+  closePopup(popupEditProfile);
 });
 
 //
@@ -20,7 +24,7 @@ function submitForm(event) { // отправка формы при закрыт�
     event.preventDefault();
     profileName.textContent = nameInput.value;
     profileDescription.textContent = descriptionInput.value;
-    changePopupCondition(popup);
+    closePopup(popup);
 };
 
 formElement.addEventListener('submit', submitForm);
@@ -49,16 +53,15 @@ function assembleCard({name, link}){
 };
 
 
-initialCards.forEach(assembleCard, () => { 
-});
+initialCards.forEach(assembleCard)
 
   // Попап 2
 editionCardButton.addEventListener('click', function(){ //открытие попапа редактирования карточек эвент
-  changePopupCondition(popupEditCard);
+  openPopup(popupEditCard);
 });
 
 cardButtonClose.addEventListener('click', function(){ //закрытие попапа редактирования профиля эвент
-  changePopupCondition(popupEditCard);
+  closePopup(popupEditCard);
 });  
 
  function addCard(event) { // Добавление карточки
@@ -66,7 +69,7 @@ cardButtonClose.addEventListener('click', function(){ //закрытие поп�
   nameForm = cardNameForm.value;
   linkForm = cardLinkForm.value;
   assembleCard({name: nameForm, link: linkForm});
-  changePopupCondition(popupEditCard);
+  closePopup(popupEditCard);
 };
 
  popupEditCard.addEventListener('submit', addCard);
@@ -84,15 +87,15 @@ function removeCard(trashIcon, cardElement){
   });
 }
 
-function addPictureOpenerEventListener(openElement, openElementTitle){
-  openElement.addEventListener('click', () =>{
+function addPictureOpenerEventListener(elementOpen, elementOpenTitle){
+  elementOpen.addEventListener('click', () =>{
     popupClickCard.classList.toggle('popup_is_open');
-    popupClickCardPhoto.src = openElement.src;
-    popupClickCardPhoto.alt = openElement.alt;
-    popupClickCardTitle.textContent = openElementTitle;
+    popupClickCardPhoto.src = elementOpen.src;
+    popupClickCardPhoto.alt = elementOpen.alt;
+    popupClickCardTitle.textContent = elementOpenTitle;
   });
 };
 
 popupCloseCardContent.addEventListener('click', function(){ //закрытие попапа редактирования профиля эвент
-  changePopupCondition(popupClickCard);
+  closePopup(popupClickCard);
 });  
