@@ -1,5 +1,4 @@
 .popup__input_type_name {
-    margin-bottom: 48px;
     border-style: none;
     border-bottom: 1px solid rgba(0, 0, 0, .2);
 }
@@ -8,6 +7,6 @@
     .popup__input_type_name {
         width: 238px;
         height: 27px;
-        margin-bottom: 30px;
+        margin-bottom: 13px;
     }
 } 

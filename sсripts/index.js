@@ -12,6 +12,7 @@ function closePopup(popupElement) { // функция закрытия попа�
 editionButton.addEventListener('click', function(){ //открытие попапа редактирования профиля эвент
     nameInput.value = profileName.textContent;
     descriptionInput.value = profileDescription.textContent;
+
     openPopup(popupEditProfile);
 });
 
@@ -93,6 +94,7 @@ function addPictureOpenerEventListener(elementOpen, elementOpenTitle){
     popupClickCardPhoto.src = elementOpen.src;
     popupClickCardPhoto.alt = elementOpen.alt;
     popupClickCardTitle.textContent = elementOpenTitle;
+  
   });
 };
 
