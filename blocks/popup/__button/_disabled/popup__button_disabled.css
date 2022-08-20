@@ -3,4 +3,32 @@
     border: 1px solid #000000;
     border-radius: 2px;
     color: #000000;
+
+    width: 358px;
+    height: 50px;
+    text-decoration: none;
+    font-family: 'Inter', 'Arial', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.22;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 31px;
 }
+}
+
+.popup__button_disabled:hover {
+    background: #fff;
+    opacity: 1;
+    transition-property: opacity;
+    transition-duration: .2s;
+}
+
+@media screen and (max-width: 767px) {
+    .popup__button_disabled {
+        width: 238px;
+        height: 46px;
+        
+    }
+} 

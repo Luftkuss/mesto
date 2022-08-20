@@ -17,12 +17,12 @@
     margin-top: 31px;
 }
 
-.popup__button:hover {
+/* .popup__button:hover {
     background: #000000;
     opacity: 0.8;
     transition-property:opacity;
     transition-duration: .2s;
-}
+} */
 
 @media screen and (max-width: 767px) {
     .popup__button {
