@@ -3,10 +3,16 @@ const variables = {
     popup: '.popup', 
     
     popupEditProfile: '.popup_edit_profile', // Popup 1
-    popupCloseButton: '.popup__close', // Закрытие попапа
     popupClickCard: '.popup_click_card',
     popupClickCardPhoto: '.popup__click-photo',
     popupClickCardTitle: '.popup__title_cardseen',
+
+    popupEditProfileCloseButton: '.popup__close-edit',
+    popupCardCloseButton: '.popup__close-add',
+    popupAddCardCloseButton: '.popup__close-cards',
+
+
+    formAddCard: 'formAddCard',
 
     profileName: '.profile__title', // Имя
     profileDescription: '.profile__description', // Описание
@@ -18,7 +24,7 @@ const variables = {
     cardInput: '.popup__input_type_name', // импут названия карточки
     descriptionInput: '.popup__input_type_description', // инпут описания
 
-    formElement: '.popup__form', // форма
+    formElementEditProfile: '.popup__form-profile', // форма
 
     popupEditProfile: '.popup_edit_profile', // попап редактирования профиля
     popupEditCard: '.popup_edit_card', // попап редактирования карточек
@@ -27,7 +33,7 @@ const variables = {
     editionProfileButton: '.profile__add-button', // кнопка редактирования профиля
     editionCardButton: '.profile__add-button', // кнопка редактирования карточек
 
-    cardButtonClose: '.popup__close',
+  
     popupCloseCardContent: '.popup__close_card-content',
     
     template: '#card-item',
@@ -45,6 +51,8 @@ const variables = {
     сardImage: '.card__image'
 }
 
+const formAddCard = document.getElementById('formAddCard');
+
 const  popupCloseCardContent = document.querySelector(variables.popupCloseCardContent);
 const  popupClickCard = document.querySelector(variables.popupClickCard);
 const  popupClickCardPhoto = document.querySelector(variables.popupClickCardPhoto);
@@ -52,12 +60,10 @@ const  popupClickCardTitle = document.querySelector(variables.popupClickCardTitl
 
 const  tamplateCardPhoto = document.querySelector(variables.tamplateCardPhoto); // Нода попапа с фото
 
-
 const list = document.querySelector(variables.list);
 const template = document.querySelector(variables.template).content.querySelector('.card'); // Нода карточки
 
 const editionButton = document.querySelector(variables.editionButton);                 // кнопка редактирвоания
-const popupCloseButton = document.querySelector(variables.popupCloseButton);                   // кнопка закрытия
 
 const profileName = document.querySelector(variables.profileName);                      // Имя 
 const profileDescription = document.querySelector(variables.profileDescription);         // Описание
@@ -65,7 +71,7 @@ const profileDescription = document.querySelector(variables.profileDescription);
 const nameInput = document.querySelector(variables.nameInput);                // Имя введение в форме
 const descriptionInput = document.querySelector(variables.descriptionInput);  // Описание введение в форме
 
-const formElement = document.querySelector(variables.formElement);                        // Форма
+const formElementEditProfile = document.querySelector(variables.formElementEditProfile);                        // Форма
 //
 const popupEditProfile = document.querySelector(variables.popupEditProfile); // поиск DOM элемента попапа редактировани профиля
 const popupEditCard = document.querySelector(variables.popupEditCard); // редактировани карточки
@@ -76,8 +82,6 @@ const popupEditContent = document.querySelector(variables.popupEditContent); // 
 const editionProfileButton = document.querySelector(variables.editionProfileButton); // DOM селектор кнопки редактирвоания опсиания
 const editionCardButton = document.querySelector(variables.editionCardButton); // DOM селектор кнопки редактирвоания списка карточек
 
-const cardButtonClose = popupEditCard.querySelector(variables.cardButtonClose);
-
 const cardNameForm = popupEditCard.querySelector(variables.cardNameForm);
 const cardLinkForm = popupEditCard.querySelector(variables.cardLinkForm);
 
@@ -86,4 +90,8 @@ const trashIcon = template.querySelector(variables.trash);
 const cardsLink = template.querySelector(variables.cardsLink);
 
 const popup = document.querySelector(variables.popup);
+
+const popupEditProfileCloseButton = document.querySelector(variables.popupEditProfileCloseButton);  // кнопка закрытия попапа редактирования профиля
+const popupCardCloseButton = document.querySelector(variables.popupCardCloseButton);   // кнопка закрытия попапа карточки
+const popupAddCardCloseButton = document.querySelector(variables.popupAddCardCloseButton);   // кнопка закрытия попапа редактирвоания карточки
 
