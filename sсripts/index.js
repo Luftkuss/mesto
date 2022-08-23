@@ -27,6 +27,7 @@ function submitFormEditProfile(event) { // отправка формы при з
     profileName.textContent = nameInput.value;
     profileDescription.textContent = descriptionInput.value;
     closePopup(popup);
+    
 };
 
 formElementEditProfile.addEventListener('submit', submitFormEditProfile);
@@ -72,6 +73,7 @@ popupCardCloseButton.addEventListener('click', function(){ //закрытие п
   linkForm = cardLinkForm.value;
   assembleCard({name: nameForm, link: linkForm});
   closePopup(popupEditCard);
+  formSubmitAddCard.disabled = false;
   event.target.reset();
   formSubmitAddCard.classList.add('popup__button_disabled');
 //  
@@ -93,7 +95,6 @@ function removeCard(trashIcon, cardElement){
 
 function addPictureOpenerEventListener(elementOpen, elementOpenTitle){
   elementOpen.addEventListener('click', () =>{
-    // popupClickCard.classList.toggle('popup_is_open');
     openPopup(popupClickCard);
     popupClickCardPhoto.src = elementOpen.src;
     popupClickCardPhoto.alt = elementOpen.alt;

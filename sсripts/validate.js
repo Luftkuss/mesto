@@ -5,21 +5,20 @@ const showInputError = (formElement, inputElement, errorMessage, inputErrorClass
   inputElement.classList.add(inputErrorClass);
   errorElement.textContent = errorMessage;
   errorElement.classList.add(errorClass);
-  enterPrevent(formElement)
 };
 
-// Функция отключения энтера
-function enterPrevent(formElement){
+// // // Функция отключения энтера
+// // function enterPrevent(formElement){
 
-formElement.addEventListener('keydown', function(e) {
-  const code = e.keyCode; 
-      if (code  === 13) {  
-      e.preventDefault();
-  } 
-});
+// // formElement.addEventListener('keydown', function(e) {
+// //   const code = e.keyCode; 
+// //       if (code  === 13) {  
+// //       e.preventDefault();
+// //   } 
+// // });
 
 
-};
+// };
 
 // , true)
 
@@ -73,8 +72,10 @@ function hasInvalidInput(inputList){
 function toggleButtonState(inputList, buttonElement, inactiveButtonClass){
   if (hasInvalidInput(inputList)) {
   buttonElement.classList.add(inactiveButtonClass);
+  buttonElement.disabled = true;
 } else {
   buttonElement.classList.remove(inactiveButtonClass);
+  buttonElement.disabled = false;
 } 
 
 }

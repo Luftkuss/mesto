@@ -11,7 +11,6 @@ const variables = {
     popupCardCloseButton: '.popup__close-add',
     popupAddCardCloseButton: '.popup__close-cards',
 
-
     formAddCard: 'formAddCard',
 
     profileName: '.profile__title', // Имя
@@ -51,6 +50,7 @@ const variables = {
     сardImage: '.card__image',
 
     formSubmitAddCard: '.popup__button-addcard'
+    
 }
 
 const formAddCard = document.getElementById('formAddCard');
