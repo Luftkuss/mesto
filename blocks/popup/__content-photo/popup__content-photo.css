@@ -1,10 +1,4 @@
 .popup__content-photo {
     position: relative;
-    
+    width:75%;
 }
-
-@media screen and (max-width: 767px) {
-    .popup__content-photo {
-        width: 282px;
-    }
-    }

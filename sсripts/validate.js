@@ -5,7 +5,23 @@ const showInputError = (formElement, inputElement, errorMessage, inputErrorClass
   inputElement.classList.add(inputErrorClass);
   errorElement.textContent = errorMessage;
   errorElement.classList.add(errorClass);
+  enterPrevent(formElement)
 };
+
+// Функция отключения энтера
+function enterPrevent(formElement){
+
+formElement.addEventListener('keydown', function(e) {
+  const code = e.keyCode; 
+      if (code  === 13) {  
+      e.preventDefault();
+  } 
+});
+
+
+};
+
+// , true)
 
 // Скрыть ошибку
 const hideInputError = (formElement, inputElement, errorClass, inputErrorClass) => {
@@ -43,10 +59,6 @@ const enableValidation = ({formSelector, inputSelector, submitButtonSelector, in
 
   const formList = Array.from(document.querySelectorAll(formSelector));
   formList.forEach((formElement) => {
-    // formElement.addEventListener('submit', function (evt) {
-    //   evt.preventDefault();
-    // });
-
     setEventListeners(formElement, inactiveButtonClass, inputSelector, submitButtonSelector, inputErrorClass, errorClass);
 
   });

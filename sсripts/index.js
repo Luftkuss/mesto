@@ -73,6 +73,8 @@ popupCardCloseButton.addEventListener('click', function(){ //закрытие п
   assembleCard({name: nameForm, link: linkForm});
   closePopup(popupEditCard);
   event.target.reset();
+  formSubmitAddCard.classList.add('popup__button_disabled');
+//  
 };
 
 formAddCard.addEventListener('submit', addCard);

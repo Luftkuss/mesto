@@ -48,10 +48,13 @@ const variables = {
 
     trash: '.card__trash',
 
-    сardImage: '.card__image'
+    сardImage: '.card__image',
+
+    formSubmitAddCard: '.popup__button-addcard'
 }
 
 const formAddCard = document.getElementById('formAddCard');
+const formSubmitAddCard = document.querySelector(variables.formSubmitAddCard);
 
 const  popupCloseCardContent = document.querySelector(variables.popupCloseCardContent);
 const  popupClickCard = document.querySelector(variables.popupClickCard);
