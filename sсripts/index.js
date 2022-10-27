@@ -8,7 +8,7 @@ function closePopup(popupElement) { // функция закрытия попа�
   popupElement.classList.remove('popup_is_open'); 
   document.removeEventListener('keyup', closeEsc);
 }; 
-
+ 
 // Попап 1
 editionButton.addEventListener('click', function(){ //открытие попапа редактирования профиля эвент
     nameInput.value = profileName.textContent;
@@ -27,7 +27,6 @@ function submitFormEditProfile(event) { // отправка формы при з
     profileName.textContent = nameInput.value;
     profileDescription.textContent = descriptionInput.value;
     closePopup(popup);
-    
 };
 
 formElementEditProfile.addEventListener('submit', submitFormEditProfile);
@@ -45,8 +44,6 @@ function createCard({name, link}) {
   return cardElement
 };
 
-
-
 function insertCard(card){ // Универсальная функция добавления карточки
   list.prepend(card);
 }
@@ -57,7 +54,6 @@ function assembleCard({name, link}){
 
 
 initialCards.forEach(assembleCard)
-
   // Попап 2
 editionCardButton.addEventListener('click', function(){ //открытие попапа редактирования карточек эвент
   openPopup(popupEditCard);
@@ -73,14 +69,12 @@ popupCardCloseButton.addEventListener('click', function(){ //закрытие п
   linkForm = cardLinkForm.value;
   assembleCard({name: nameForm, link: linkForm});
   closePopup(popupEditCard);
-  formSubmitAddCard.disabled = false;
+  formSubmitAddCard.disabled = true;
   event.target.reset();
   formSubmitAddCard.classList.add('popup__button_disabled');
-//  
 };
 
 formAddCard.addEventListener('submit', addCard);
-
  function likeFun(likeElement){
    likeElement.addEventListener('click', function (){
     likeElement.classList.toggle('card__image-like_liked');
@@ -99,7 +93,6 @@ function addPictureOpenerEventListener(elementOpen, elementOpenTitle){
     popupClickCardPhoto.src = elementOpen.src;
     popupClickCardPhoto.alt = elementOpen.alt;
     popupClickCardTitle.textContent = elementOpenTitle;
-  
   });
 };
 
