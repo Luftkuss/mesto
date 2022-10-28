@@ -1,28 +1,41 @@
-function openPopup(popupElement) {  // функция открытия попапа
+// функция открытия попапа
+function openPopup(popupElement) {
     popupElement.classList.add('popup_is_open'); 
     document.addEventListener('keyup', closeEsc);
   } 
 
-
-function closePopup(popupElement) { // функция закрытия попапа 
+// функция закрытия попапа
+function closePopup(popupElement) {
   popupElement.classList.remove('popup_is_open'); 
   document.removeEventListener('keyup', closeEsc);
 }; 
- 
-// Попап 1
-editionButton.addEventListener('click', function(){ //открытие попапа редактирования профиля эвент
+
+// Функция закрытия попапа при клике на ESC // Активируется при открытии попапа //
+function  closeEsc(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_is_open');
+    closePopup(openedPopup); 
+  }
+} 
+
+////
+
+// Попап 1 //открытие попапа редактирования профиля эвент
+editionButton.addEventListener('click', function(){ 
     nameInput.value = profileName.textContent;
     descriptionInput.value = profileDescription.textContent;
-
     openPopup(popupEditProfile);
 });
 
-popupEditProfileCloseButton.addEventListener('click', function(){ //закрытие попапа редактирования профиля эвент
+//закрытие попапа редактирования профиля эвент
+popupEditProfileCloseButton.addEventListener('click', function(){
   closePopup(popupEditProfile);
 });
 
-//
-function submitFormEditProfile(event) { // отправка формы при закрытии попапа
+////
+
+// отправка формы при закрытии попапа
+function submitFormEditProfile(event) {
     event.preventDefault();
     profileName.textContent = nameInput.value;
     profileDescription.textContent = descriptionInput.value;
@@ -31,29 +44,29 @@ function submitFormEditProfile(event) { // отправка формы при з
 
 formElementEditProfile.addEventListener('submit', submitFormEditProfile);
 
-function createCard({name, link}) {
-  const cardElement = template.cloneNode(true); 
-  const cardsName = cardElement.querySelector(variables.cardsName);
-  const cardsLink = cardElement.querySelector(variables.cardsLink);
-  cardsName.textContent = name;
-  cardsLink.src = link;
-  cardsLink.alt = name;
-  likeFun(cardElement.querySelector(variables.like));
-  removeCard (cardElement.querySelector(variables.trash), cardElement);
-  addPictureOpenerEventListener(cardElement.querySelector(variables.cardsLink), name);
-  return cardElement
-};
+// function createCard({name, link}) {
+//   const cardElement = template.cloneNode(true); 
+//   const cardsName = cardElement.querySelector(variables.cardsName);
+//   const cardsLink = cardElement.querySelector(variables.cardsLink);
+//   cardsName.textContent = name;
+//   cardsLink.src = link;
+//   cardsLink.alt = name;
+//   likeFun(cardElement.querySelector(variables.like));
+//   removeCard (cardElement.querySelector(variables.trash), cardElement);
+//   addPictureOpenerEventListener(cardElement.querySelector(variables.cardsLink), name);
+//   return cardElement
+// };
 
-function insertCard(card){ // Универсальная функция добавления карточки
-  list.prepend(card);
-}
+// function insertCard(card){ // Универсальная функция добавления карточки
+//   list.prepend(card);
+// }
 
-function assembleCard({name, link}){
-  insertCard(createCard({name, link}));
-};
+// function assembleCard({name, link}){
+//   insertCard(createCard({name, link}));
+// };
 
 
-initialCards.forEach(assembleCard)
+// initialCards.forEach(assembleCard)
   // Попап 2
 editionCardButton.addEventListener('click', function(){ //открытие попапа редактирования карточек эвент
   openPopup(popupEditCard);
@@ -74,18 +87,18 @@ popupCardCloseButton.addEventListener('click', function(){ //закрытие п
   formSubmitAddCard.classList.add('popup__button_disabled');
 };
 
-formAddCard.addEventListener('submit', addCard);
- function likeFun(likeElement){
-   likeElement.addEventListener('click', function (){
-    likeElement.classList.toggle('card__image-like_liked');
-   });
- };
+// formAddCard.addEventListener('submit', addCard);
+//  function likeFun(likeElement){
+//    likeElement.addEventListener('click', function (){
+//     likeElement.classList.toggle('card__image-like_liked');
+//    });
+//  };
 
-function removeCard(trashIcon, cardElement){
-  trashIcon.addEventListener('click', () => {
-    cardElement.remove();
-  });
-}
+// function removeCard(trashIcon, cardElement){
+//   trashIcon.addEventListener('click', () => {
+//     cardElement.remove();
+//   });
+// }
 
 function addPictureOpenerEventListener(elementOpen, elementOpenTitle){
   elementOpen.addEventListener('click', () =>{
@@ -118,11 +131,3 @@ popupClickCard.addEventListener('click', (evt) => {
         closePopup(popupClickCard);
   };
 });
-
-// Функция закрытия попапа при клике на ESC
-function  closeEsc(evt) {
-  if (evt.key === 'Escape') {
-    const openedPopup = document.querySelector('.popup_is_open');
-    closePopup(openedPopup); 
-  }
-} 

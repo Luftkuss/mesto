@@ -1,26 +1,11 @@
 
- // Показать ошибку
+// Показать ошибку
 const showInputError = (formElement, inputElement, errorMessage, inputErrorClass, errorClass) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add(inputErrorClass);
   errorElement.textContent = errorMessage;
   errorElement.classList.add(errorClass);
 };
-
-// // // Функция отключения энтера
-// // function enterPrevent(formElement){
-
-// // formElement.addEventListener('keydown', function(e) {
-// //   const code = e.keyCode; 
-// //       if (code  === 13) {  
-// //       e.preventDefault();
-// //   } 
-// // });
-
-
-// };
-
-// , true)
 
 // Скрыть ошибку
 const hideInputError = (formElement, inputElement, errorClass, inputErrorClass) => {

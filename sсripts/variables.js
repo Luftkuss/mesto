@@ -28,11 +28,10 @@ const variables = {
     popupEditProfile: '.popup_edit_profile', // попап редактирования профиля
     popupEditCard: '.popup_edit_card', // попап редактирования карточек
     popupEditContent: '.popup_edit_content', // попап наполнения карточек
-
+ 
     editionProfileButton: '.profile__add-button', // кнопка редактирования профиля
     editionCardButton: '.profile__add-button', // кнопка редактирования карточек
 
-  
     popupCloseCardContent: '.popup__close_card-content',
     
     template: '#card-item',

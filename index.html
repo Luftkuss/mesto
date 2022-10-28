@@ -39,7 +39,7 @@
                         ></button>
                         
                     </div>
-                    <p class="profile__description">Cмотрите, завидуйте, я — гражданин Советского Союза.</p>
+                    <p class="profile__description">Гражданин Советского Союза.</p>
                 </div>
             </div>
 
@@ -68,7 +68,11 @@
     <script src="./sсripts/variables.js" defer></script>
     <script src="./sсripts/cards.js" defer></script>
     <script src="./sсripts/validate.js" defer></script>
-    <script src="./sсripts/index.js" defer></script>
+    <!-- <script src="./sсripts/index.js" defer></script> -->
+
+    <script type="module" src="./sсripts/Card.js"></script>
+    <script type="module" src="./sсripts/FormValidator.js"></script>
+    <script type="module" src="./sсripts/index.js"></script>
 
 
     <div class="popup popup_edit_profile">
@@ -115,7 +119,7 @@
         </div>
     </div>
 
-    <template id="card-item">
+    <template class="card-template" id="card-item">
         <li class="card">
 
             <img 
@@ -135,10 +139,7 @@
                 <h2 class="card__title" id="card-name">Севастополь</h2>
 
                 <img
-                
-                
                     src="./images/like_disabled.svg"
-                    
                     alt="лайк"
                     class="card__image-like"
                 >
