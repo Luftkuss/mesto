@@ -1,3 +1,15 @@
+// функция открытия попапа
+function openPopup(popupElement) {
+  popupElement.classList.add('popup_is_open'); 
+  // document.addEventListener('keyup', closeEsc);
+} 
+
+// функция закрытия попапа
+function closePopup(popupElement) {
+popupElement.classList.remove('popup_is_open'); 
+// document.removeEventListener('keyup', closeEsc);
+}; 
+//
 
 const initialCards = [
     { name: 'Архыз',
@@ -19,10 +31,11 @@ const initialCards = [
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'},
   ];
 
-const elementsTable = document.querySelector('.elements__table');
+const elementsTable = document.querySelector('.elements__table'); // не торгать!!!
+
 const trash = document.getElementById('card-item').content.querySelector('.card__image-like').cloneNode(true);
 
-// console.log(trash)
+console.log(elementsTable)
 
 
 class Card {
@@ -42,15 +55,36 @@ class Card {
     }
 
     _setEventListeners(){
-        this._element.querySelector('.card__trash').addEventListener('click', () => {
-            this._removeCard()
-        })
+        // this._element.querySelector('.card__trash').addEventListener('click', () => {
+        //   this._removeCard()
+        // })
 
         this._element.querySelector('.card__image-like').addEventListener('click', () => {
-            this. _likeCard()
+          this._likeCard()
         })
+
+        this._element.addEventListener('click', () => {
+          this._openCardsPopup()
+        })
+
+        document.querySelector('.popup__close_card-content').addEventListener('click', () => {
+          this._closeCardsPopup()
+         })
     }
 
+    _openCardsPopup(){
+      openPopup(popupClickCard);
+      popupClickCardPhoto.src = this.link;
+      popupClickCardPhoto.alt = this.name;
+      popupClickCardTitle.textContent = this.name;
+    }
+
+    _closeCardsPopup(){
+      console.log(2)
+      const cardsPopup = document.querySelector('.popup_click_card');
+      closePopup(cardsPopup);
+    }
+//
     _removeCard(){
         this._element.remove();
     }

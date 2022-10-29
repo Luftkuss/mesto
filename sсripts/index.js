@@ -1,14 +1,14 @@
-// функция открытия попапа
-function openPopup(popupElement) {
-    popupElement.classList.add('popup_is_open'); 
-    document.addEventListener('keyup', closeEsc);
-  } 
+// функция открытия попапа // в кардс
+// function openPopup(popupElement) {
+//     popupElement.classList.add('popup_is_open'); 
+//     document.addEventListener('keyup', closeEsc);
+//   } 
 
-// функция закрытия попапа
-function closePopup(popupElement) {
-  popupElement.classList.remove('popup_is_open'); 
-  document.removeEventListener('keyup', closeEsc);
-}; 
+// // // функция закрытия попапа // в кардс
+// function closePopup(popupElement) {
+//   popupElement.classList.remove('popup_is_open'); 
+//   document.removeEventListener('keyup', closeEsc);
+// }; 
 
 // Функция закрытия попапа при клике на ESC // Активируется при открытии попапа //
 function  closeEsc(evt) {
@@ -100,18 +100,18 @@ popupCardCloseButton.addEventListener('click', function(){ //закрытие п
 //   });
 // }
 
-function addPictureOpenerEventListener(elementOpen, elementOpenTitle){
-  elementOpen.addEventListener('click', () =>{
-    openPopup(popupClickCard);
-    popupClickCardPhoto.src = elementOpen.src;
-    popupClickCardPhoto.alt = elementOpen.alt;
-    popupClickCardTitle.textContent = elementOpenTitle;
-  });
-};
+// function addPictureOpenerEventListener(elementOpen, elementOpenTitle){
+//   elementOpen.addEventListener('click', () =>{
+//     openPopup(popupClickCard);
+//     popupClickCardPhoto.src = elementOpen.src;
+//     popupClickCardPhoto.alt = elementOpen.alt;
+//     popupClickCardTitle.textContent = elementOpenTitle;
+//   });
+// };
 
-popupAddCardCloseButton.addEventListener('click', function(){ //закрытие попапа редактирования профиля эвент
-  closePopup(popupClickCard);
-});  
+// popupAddCardCloseButton.addEventListener('click', function(){ //закрытие попапа редактирования профиля эвент
+//   closePopup(popupClickCard);
+// });  
 
 // Клик на оверлей попап редактировани профиля
 popupEditProfile.addEventListener('click', (evt) => {
