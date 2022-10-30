@@ -1,44 +1,11 @@
-// функция открытия попапа
-function openPopup(popupElement) {
-  popupElement.classList.add('popup_is_open'); 
-  // document.addEventListener('keyup', closeEsc);
-} 
-
-// функция закрытия попапа
-function closePopup(popupElement) {
-popupElement.classList.remove('popup_is_open'); 
-// document.removeEventListener('keyup', closeEsc);
-}; 
-//
-
-const initialCards = [
-    { name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'},
-
-    { name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'},
-
-    { name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'},
-
-    { name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'},
-
-    { name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'},
-
-    { name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'},
-  ];
+import { initialCards } from './index.js'
+import { openPopup, closePopup, closeEsc } from './index.js'
 
 const elementsTable = document.querySelector('.elements__table'); // не торгать!!!
 
 const trash = document.getElementById('card-item').content.querySelector('.card__image-like').cloneNode(true);
 
-console.log(elementsTable)
-
-
-class Card {
+export default class Card {
     constructor(name, link){
         this.name = name,
         this.link = link
@@ -55,16 +22,19 @@ class Card {
     }
 
     _setEventListeners(){
-        // this._element.querySelector('.card__trash').addEventListener('click', () => {
-        //   this._removeCard()
-        // })
+        this._element.querySelector('.card__trash').addEventListener('click', () => {
+          this._removeCard()
+        })
 
         this._element.querySelector('.card__image-like').addEventListener('click', () => {
           this._likeCard()
         })
 
-        this._element.addEventListener('click', () => {
-          this._openCardsPopup()
+        this._element.addEventListener('click', (e) => {
+          if (!e.target.classList.contains('card__trash') && !e.target.classList.contains('card__image-like') ) {
+            this._openCardsPopup();
+            };
+      
         })
 
         document.querySelector('.popup__close_card-content').addEventListener('click', () => {
@@ -80,7 +50,6 @@ class Card {
     }
 
     _closeCardsPopup(){
-      console.log(2)
       const cardsPopup = document.querySelector('.popup_click_card');
       closePopup(cardsPopup);
     }
@@ -104,20 +73,19 @@ class Card {
 
 }
 
-//
-
-function removeCard(trashIcon, cardElement){
-    trashIcon.addEventListener('click', () => {
-      cardElement.remove();
-    });
-  }
-
-//
-
 initialCards.forEach((item) => {
     const card = new Card(item.name, item.link);
     const cardElement = card.generateCard();
     elementsTable.prepend(cardElement);
 });
 
+//
+
+// function removeCard(trashIcon, cardElement){
+//     trashIcon.addEventListener('click', () => {
+//       cardElement.remove();
+//     });
+//   }
+
+//
 
