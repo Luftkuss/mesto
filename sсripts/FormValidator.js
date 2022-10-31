@@ -23,45 +23,44 @@ class FormValidator {
 
   _setEventListeners(){
     this.inputList = Array.from(this.formElement.querySelectorAll(this.inputSelector));
-    this.buttonElement = this.formElement.querySelector(this.submitButtonSelector);
-
+    this.buttonElement = this.formElement.querySelector(this.submitButtonSelector); // нужно будет, когда буду работать с кнопкой
 
     this.inputList.forEach(inputElement => {
         inputElement.addEventListener('input', () => {
-            this._checkInputValidity();
+            this._checkInputValidity(inputElement);
+            
         });
       });
   };
 
   _checkInputValidity(inputElement){
-    console.log(inputElement)
+    console.log(inputElement.validity.valid)
 
     if (!inputElement.validity.valid) {
-        showInputError(this.formElement, inputElement, inputElement.validationMessage, inputErrorClass, errorClass);
-        console.log(showInputError1)
+        this._showInputError(inputElement);
     } else {
-        hideInputError(this.formElement, inputElement, this.errorClass, this.inputErrorClass);
-        console.log(hideInputError1)
+        this._hideInputError(inputElement);
     }
   }
 
+  _showInputError(inputElement){
+    const errorElement = this.formElement.querySelector(`.${inputElement.id}-error`);
+    inputElement.classList.add(this.inputErrorClass);
+    errorElement.textContent = inputElement.validationMessage;
+    errorElement.classList.add(this.errorClass);
+  };
+
+  _hideInputError(inputElement){
+    const errorElement = this.formElement.querySelector(`.${inputElement.id}-error`);
+    inputElement.classList.remove(this.inputErrorClass);
+    errorElement.textContent = '';
+    errorElement.classList.remove(this.errorClass);
+  }
+
+
+
 
 };
-
-// const showInputError = (formElement, inputElement, errorMessage, inputErrorClass, errorClass) => {
-//     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-//     inputElement.classList.add(inputErrorClass);
-//     errorElement.textContent = errorMessage;
-//     errorElement.classList.add(errorClass);
-//   };
-
-// const hideInputError = (formElement, inputElement, errorClass, inputErrorClass) => {
-//     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-//     inputElement.classList.remove(inputErrorClass);
-//     errorElement.classList.remove(errorClass);
-//     errorElement.textContent = '';
-//   };
-  
 
 
 const classSettings = {
