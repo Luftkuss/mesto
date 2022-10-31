@@ -7,14 +7,14 @@ const formElementEditProfile = document.querySelector('.popup__form-profile');
 
 
 class FormValidator {
-  constructor(classSettings, form){
-    this._classSettings = classSettings;
-    this._form = form;
-    this._inputSelector = classSettings.inputSelector;
-    this._errorClass = classSettings.errorClass;
-    this._inputErrorClass = classSettings.inputErrorClass;
-    this._inactiveButtonClass = classSettings.inactiveButtonClass;
-    this._submitButtonSelector = classSettings.submitButtonSelector;
+  constructor(classSettings, formElement){
+    this.classSettings = classSettings;
+    this.formElement = formElement;
+    this.inputSelector = classSettings.inputSelector;
+    this.errorClass = classSettings.errorClass;
+    this.inputErrorClass = classSettings.inputErrorClass;
+    this.inactiveButtonClass = classSettings.inactiveButtonClass;
+    this.submitButtonSelector = classSettings.submitButtonSelector;
   }
 
   enableValidation(){
@@ -22,10 +22,27 @@ class FormValidator {
   }
 
   _setEventListeners(){
+    this.inputList = Array.from(this.formElement.querySelectorAll(this.inputSelector));
+    this.buttonElement = this.formElement.querySelector(this.submitButtonSelector);
 
+
+    this.inputList.forEach(inputElement => {
+        inputElement.addEventListener('input', () => {
+            this._checkInputValidity();
+            // console.log(1)
+        
+        });
+      });
+  };
+
+  _checkInputValidity(){
+    console.log(1);
   }
 
+
 };
+
+
 
 const classSettings = {
     formSelector: '.popup__form',
@@ -35,6 +52,7 @@ const classSettings = {
     inputErrorClass: 'popup__input_type_error',
     errorClass: 'popup__input-error_active'
   };
+
 
   const formElementEditProfileValidator = new FormValidator(classSettings, formElementEditProfile);
   const formAddCardValidator = new FormValidator(classSettings, formAddCard);
