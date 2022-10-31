@@ -91,3 +91,4 @@ popupEditCard.addEventListener('click', (evt) => { // Клик на оверле
         closePopup(popupEditCard);
   };
 });
+

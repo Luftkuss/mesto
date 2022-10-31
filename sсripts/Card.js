@@ -17,7 +17,7 @@ export default class Card {
         .content
         .querySelector('.card')
         .cloneNode(true);
-        
+
         return cardElement
     }
 
@@ -53,7 +53,7 @@ export default class Card {
       const cardsPopup = document.querySelector('.popup_click_card');
       closePopup(cardsPopup);
     }
-//
+
     _removeCard(){
         this._element.remove();
     }
@@ -78,14 +78,4 @@ initialCards.forEach((item) => {
     const cardElement = card.generateCard();
     elementsTable.prepend(cardElement);
 });
-
-//
-
-// function removeCard(trashIcon, cardElement){
-//     trashIcon.addEventListener('click', () => {
-//       cardElement.remove();
-//     });
-//   }
-
-//
 
