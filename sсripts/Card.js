@@ -1,9 +1,8 @@
 import { initialCards } from './index.js'
 import { openPopup, closePopup, closeEsc } from './index.js'
+// import { elementsTable } from './variables'
 
-const elementsTable = document.querySelector('.elements__table'); // не торгать!!!
-
-const trash = document.getElementById('card-item').content.querySelector('.card__image-like').cloneNode(true);
+const elementsTable = document.querySelector('.elements__table');
 
 export default class Card {
     constructor(name, link){
