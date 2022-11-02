@@ -1,49 +1,32 @@
 import Card from './Card.js';
-// import { FormValidator } from './FormValidator';
+import FormValidator from './FormValidator.js';
+import { initialCards, editionButton, popupEditProfileCloseButton, formElementEditProfile, editionCardButton, popupCardCloseButton,
+  popupEditProfile, popupEditCard, elementsTable, popupClickCard, nameInput, profileName, profileDescription, descriptionInput,
+  popup, cardNameForm, cardLinkForm, list, formSubmitAddCard, openPopup, closePopup, classSettings } from './variables.js';
 
-export const initialCards = [
-  { name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'},
-  { name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'},
-  { name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'},
-  { name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'},
-  { name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'},
-  { name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'},
-];
+const formElementEditProfileValidator = new FormValidator(classSettings, formElementEditProfile);
+const formAddCardValidator = new FormValidator(classSettings, formAddCard);
+  
+formElementEditProfileValidator.enableValidation();
+formAddCardValidator.enableValidation();
 
-export function openPopup(popupElement) {
-  popupElement.classList.add('popup_is_open'); 
-  document.addEventListener('keyup', closeEsc);
-  };
+initialCards.forEach((item) => {
+  const card = new Card (item.name, item.link);
+  const cardElement = card.generateCard();
+  elementsTable.prepend(cardElement);
+});
 
-export function closePopup(popupElement) {
-  popupElement.classList.remove('popup_is_open'); 
-  document.removeEventListener('keyup', closeEsc);
-  }; 
-
-export function  closeEsc(evt) {
-  if (evt.key === 'Escape') {
-  const openedPopup = document.querySelector('.popup_is_open');
-  closePopup(openedPopup); 
-    }
-  } 
-
-editionButton.addEventListener('click', function(){ // Попап 1 //открытие попапа редактирования профиля эвент
+editionButton.addEventListener('click', function() {
   nameInput.value = profileName.textContent;
   descriptionInput.value = profileDescription.textContent;
   openPopup(popupEditProfile);
   });
 
-popupEditProfileCloseButton.addEventListener('click', function(){ //закрытие попапа редактирования профиля эвент
+popupEditProfileCloseButton.addEventListener('click', function() {
   closePopup(popupEditProfile);
   });
 
-function submitFormEditProfile(event) { // отправка формы при закрытии попапа
+function submitFormEditProfile(event) {
   event.preventDefault();
   profileName.textContent = nameInput.value;
   profileDescription.textContent = descriptionInput.value;
@@ -52,17 +35,17 @@ function submitFormEditProfile(event) { // отправка формы при з
 
 formElementEditProfile.addEventListener('submit', submitFormEditProfile);
 
-editionCardButton.addEventListener('click', function(){ // Попап 2 // открытие попапа редактирования карточек эвент
+editionCardButton.addEventListener('click', function(){
   openPopup(popupEditCard);
   });
 
-popupCardCloseButton.addEventListener('click', function(){ // закрытие попапа редактирования профиля эвент
+popupCardCloseButton.addEventListener('click', function(){
   closePopup(popupEditCard);
   });  
 
 formAddCard.addEventListener('submit', addCard);
 
-function addCard(event) { // Добавление карточки
+function addCard(event) {
   event.preventDefault();
   const nameForm = cardNameForm.value;
   const linkForm = cardLinkForm.value;
@@ -74,14 +57,20 @@ function addCard(event) { // Добавление карточки
   formSubmitAddCard.classList.add('popup__button_disabled');
   };
 
-popupEditProfile.addEventListener('click', (evt) => { // Клик на оверлей попап редактировани профиля
+popupEditProfile.addEventListener('click', (evt) => {
   if (evt.target.classList.contains('popup_is_open')) {
     closePopup(popupEditProfile);
     };
   });
 
-popupEditCard.addEventListener('click', (evt) => { // Клик на оверлей попап создания карточки 
+popupEditCard.addEventListener('click', (evt) => {
   if (evt.target.classList.contains('popup_is_open')) {
     closePopup(popupEditCard);
+    };
+  });
+
+popupClickCard.addEventListener('click', (evt) => {
+  if (evt.target.classList.contains('popup_is_open')) {
+    closePopup(popupClickCard);
     };
   });

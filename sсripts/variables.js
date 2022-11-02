@@ -1,3 +1,6 @@
+
+
+
 const variables = {
     editionButton: '.profile__edit-button',
     popup: '.popup', 
@@ -31,37 +34,80 @@ const variables = {
     like: '.card__image-like',
     trash: '.card__trash',
     сardImage: '.card__image',
-    formSubmitAddCard: '.popup__button-addcard'
+    formSubmitAddCard: '.popup__button-addcard',
+    elementsTable: '.elements__table'
 }
 
-const formAddCard = document.getElementById('formAddCard');
-const formSubmitAddCard = document.querySelector(variables.formSubmitAddCard);
+export const classSettings = {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__button',
+    inactiveButtonClass: 'popup__button_disabled',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__input-error_active'
+  };
+
+export function openPopup(popupElement) {
+    popupElement.classList.add('popup_is_open'); 
+    document.addEventListener('keyup', closeEsc);
+    };
+
+export function closePopup(popupElement) {
+    popupElement.classList.remove('popup_is_open'); 
+    document.removeEventListener('keyup', closeEsc);
+    }; 
+
+export function closeEsc(evt) {
+    if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_is_open');
+    closePopup(openedPopup); 
+        }
+    } 
+
+
+
+export const elementsTable = document.querySelector(variables.elementsTable);
+export const formAddCard = document.getElementById('formAddCard');
+export const formSubmitAddCard = document.querySelector(variables.formSubmitAddCard);
 const popupCloseCardContent = document.querySelector(variables.popupCloseCardContent);
-const popupClickCard = document.querySelector(variables.popupClickCard);
-const popupClickCardPhoto = document.querySelector(variables.popupClickCardPhoto);
-const popupClickCardTitle = document.querySelector(variables.popupClickCardTitle);
+export const popupClickCard = document.querySelector(variables.popupClickCard);
+export const popupClickCardPhoto = document.querySelector(variables.popupClickCardPhoto);
+export const popupClickCardTitle = document.querySelector(variables.popupClickCardTitle);
 const tamplateCardPhoto = document.querySelector(variables.tamplateCardPhoto);
-const list = document.querySelector(variables.list);
+export const list = document.querySelector(variables.list);
 const template = document.querySelector(variables.template).content.querySelector('.card'); 
-const editionButton = document.querySelector(variables.editionButton);
-const profileName = document.querySelector(variables.profileName);
-const profileDescription = document.querySelector(variables.profileDescription);
-const nameInput = document.querySelector(variables.nameInput);
-const descriptionInput = document.querySelector(variables.descriptionInput);
-const formElementEditProfile = document.querySelector(variables.formElementEditProfile);
-const popupEditProfile = document.querySelector(variables.popupEditProfile);
-const popupEditCard = document.querySelector(variables.popupEditCard);
+export const editionButton = document.querySelector(variables.editionButton);
+export const profileName = document.querySelector(variables.profileName);
+export const profileDescription = document.querySelector(variables.profileDescription);
+export const nameInput = document.querySelector(variables.nameInput);
+export const descriptionInput = document.querySelector(variables.descriptionInput);
+export const formElementEditProfile = document.querySelector(variables.formElementEditProfile);
+export const popupEditProfile = document.querySelector(variables.popupEditProfile);
+export const popupEditCard = document.querySelector(variables.popupEditCard);
 const cardInput = popupEditCard.querySelector(variables.cardInput);
 const popupEditContent = document.querySelector(variables.popupEditContent);
 const editionProfileButton = document.querySelector(variables.editionProfileButton);
-const editionCardButton = document.querySelector(variables.editionCardButton);
-const cardNameForm = popupEditCard.querySelector(variables.cardNameForm);
-const cardLinkForm = popupEditCard.querySelector(variables.cardLinkForm);
+export const editionCardButton = document.querySelector(variables.editionCardButton);
+export const cardNameForm = popupEditCard.querySelector(variables.cardNameForm);
+export const cardLinkForm = popupEditCard.querySelector(variables.cardLinkForm);
 const trashIcon = template.querySelector(variables.trash);
 const cardsLink = template.querySelector(variables.cardsLink);
-const popup = document.querySelector(variables.popup);
-const popupEditProfileCloseButton = document.querySelector(variables.popupEditProfileCloseButton);
-const popupCardCloseButton = document.querySelector(variables.popupCardCloseButton);
+export const popup = document.querySelector(variables.popup);
+export const popupEditProfileCloseButton = document.querySelector(variables.popupEditProfileCloseButton);
+export const popupCardCloseButton = document.querySelector(variables.popupCardCloseButton);
 const popupAddCardCloseButton = document.querySelector(variables.popupAddCardCloseButton);
 
-// export const elementsTable = document.querySelector('.elements__table');
+export const initialCards = [
+    { name: 'Архыз',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'},
+    { name: 'Челябинская область',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'},
+    { name: 'Иваново',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'},
+    { name: 'Камчатка',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'},
+    { name: 'Холмогорский район',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'},
+    { name: 'Байкал',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'},
+  ];

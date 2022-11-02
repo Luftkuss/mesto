@@ -1,4 +1,4 @@
-export class FormValidator {
+export default class FormValidator {
   constructor(classSettings, formElement){
     this.classSettings = classSettings;
     this.formElement = formElement;
@@ -65,19 +65,3 @@ export class FormValidator {
             })
         }
     };
-
-    const classSettings = {
-        formSelector: '.popup__form',
-        inputSelector: '.popup__input',
-        submitButtonSelector: '.popup__button',
-        inactiveButtonClass: 'popup__button_disabled',
-        inputErrorClass: 'popup__input_type_error',
-        errorClass: 'popup__input-error_active'
-        };
-      
-      
-      const formElementEditProfileValidator = new FormValidator(classSettings, formElementEditProfile);
-      const formAddCardValidator = new FormValidator(classSettings, formAddCard);
-      
-      formElementEditProfileValidator.enableValidation();
-      formAddCardValidator.enableValidation();

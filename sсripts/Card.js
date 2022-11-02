@@ -1,8 +1,4 @@
-import { initialCards } from './index.js'
-import { openPopup, closePopup, closeEsc } from './index.js'
-// import { elementsTable } from './variables'
-
-const elementsTable = document.querySelector('.elements__table');
+import { popupClickCard, popupClickCardPhoto, popupClickCardTitle, openPopup, closePopup } from './variables.js';
 
 export default class Card {
     constructor(name, link){
@@ -33,7 +29,6 @@ export default class Card {
           if (!e.target.classList.contains('card__trash') && !e.target.classList.contains('card__image-like') ) {
             this._openCardsPopup();
             };
-      
         })
 
         document.querySelector('.popup__close_card-content').addEventListener('click', () => {
@@ -69,12 +64,4 @@ export default class Card {
 
         return this._element;
     };
-
 }
-
-initialCards.forEach((item) => {
-    const card = new Card(item.name, item.link);
-    const cardElement = card.generateCard();
-    elementsTable.prepend(cardElement);
-});
-
