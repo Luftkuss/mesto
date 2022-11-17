@@ -71,7 +71,6 @@
             <h3 class="popup__title">Редактировать профиль</h3>
             <form action="./" class="popup__form popup__form-profile" novalidate>
                 <input id="name" name="Имя" type="text" class="popup__input popup__input_type_name" placeholder="Имя" minlength="2" maxlength="40" required>
-                <!-- Переписать БЭМ классов type popup__input_type_error &  -->
                 <span class="popup__input-error name-error">Вы пропустили это поле.</span> 
                 <input id="description" name="Описание" type="text" class="popup__input popup__input_type_description" placeholder="Описание" minlength="2" maxlength="200" required>
                 <span class="popup__input-error description-error">Введите адрес сайта.</span> 
@@ -79,7 +78,6 @@
             </form>
         </div>
     </div>
-<!-- popup__input-error popup__input-error_type_description -->
     <div class="popup popup_edit_card">
         <div class="popup__content">
             <button id="#close-addcard" class="popup__close popup__close-add"></button>
@@ -141,6 +139,9 @@
     <script type="module" src="./sсripts/variables.js"></script>
     <script type="module" src="./sсripts/FormValidator.js"></script>
     <script type="module" src="./sсripts/Card.js"></script>
+    <script type="module" src="./sсripts/Section.js"></script>
+    <script type="module" src="./sсripts/Popup.js"></script>
+    <script type="module" src="./sсripts/PopupWithImage.js"></script>
     <script type="module" src="./sсripts/index.js"></script>
 </body>
 </html>

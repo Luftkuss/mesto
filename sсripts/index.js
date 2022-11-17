@@ -1,89 +1,62 @@
 import Card from './Card.js';
+import Section from './Section.js';
 import FormValidator from './FormValidator.js';
 import { initialCards, editionButton, popupEditProfileCloseButton, formElementEditProfile, editionCardButton, popupCardCloseButton,
   popupEditProfile, popupEditCard, popupClickCard, nameInput, profileName, profileDescription, descriptionInput, cardNameForm,
   cardLinkForm, list, formSubmitAddCard } from './variables.js';
-import { classSettings, openPopup, closePopup } from './scripts.js'
+import { classSettings } from './scripts.js';
+import Popup from './Popup.js';
 
 const formElementEditProfileValidator = new FormValidator(classSettings, formElementEditProfile);
 const formAddCardValidator = new FormValidator(classSettings, formAddCard);
-  
 formElementEditProfileValidator.enableValidation();
 formAddCardValidator.enableValidation();
 
-initialCards.forEach((item) => {
-  const name = item.name;
-  const link = item.link;
-  createCard({name, link})
-});
+const cardList = new Section({
+  items: initialCards,
+  renderer: (item) => {
+        const name = item.name;
+        const link = item.link;
+        createCard({name, link})
+  }
+}, '.elements__table');
+cardList.renderItems();
 
 formAddCard.addEventListener('submit', handleAddCard);
-
 function handleAddCard(event) {
   event.preventDefault();
   const name = cardNameForm.value;
   const link = cardLinkForm.value;
   createCard({name, link});
-  closePopup(popupEditCard);
+  editionCardButtonPopupElement.close();
   console.log(formSubmitAddCard)
   event.target.reset();
   formAddCardValidator.toDisableButton()
 };
-
 function createCard({name, link}){
   const newCard = new Card ({name, link});
-  insertCard(newCard.generateCard());
-};
-
-function insertCard(cardElement){
-  list.prepend(cardElement);
+  cardList.addItem(newCard.generateCard());
 };
  
+const editButtonPopupElement = new Popup('.popup_edit_profile');
+const editionCardButtonPopupElement = new Popup('.popup_edit_card');
+const popupClickCardPopupElement = new Popup('.popup_click_card');
+
 editionButton.addEventListener('click', function() {
   nameInput.value = profileName.textContent;
   descriptionInput.value = profileDescription.textContent;
-  openPopup(popupEditProfile);
-});
-
-popupEditProfileCloseButton.addEventListener('click', function() {
-  closePopup(popupEditProfile);
+  editButtonPopupElement.open();
 });
 
 function submitFormEditProfile(event) {
   event.preventDefault();
   profileName.textContent = nameInput.value;
   profileDescription.textContent = descriptionInput.value;
-  closePopup(popupEditProfile);
+  editButtonPopupElement.close();
 };
 
 formElementEditProfile.addEventListener('submit', submitFormEditProfile);
 
 editionCardButton.addEventListener('click', function(){
-  openPopup(popupEditCard);
+  editionCardButtonPopupElement.open();
 });
-
-popupCardCloseButton.addEventListener('click', function(){
-  closePopup(popupEditCard);
-});  
-
-popupEditProfile.addEventListener('click', (evt) => {
-  if (evt.target.classList.contains('popup_is_open')) {
-      closePopup(popupEditProfile);
-    };
-});
-
-popupEditCard.addEventListener('click', (evt) => {
-  if (evt.target.classList.contains('popup_is_open')) {
-      closePopup(popupEditCard);
-    };
-});
-
-popupClickCard.addEventListener('click', (evt) => {
-  if (evt.target.classList.contains('popup_is_open')) {
-      closePopup(popupClickCard);
-    };
-});
-
-popupClickCard.querySelector('.popup__close_card-content').addEventListener('click', () => {
-      closePopup(popupClickCard)
- });
