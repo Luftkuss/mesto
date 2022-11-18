@@ -5,7 +5,13 @@ import { initialCards, editionButton, popupEditProfileCloseButton, formElementEd
   popupEditProfile, popupEditCard, popupClickCard, nameInput, profileName, profileDescription, descriptionInput, cardNameForm,
   cardLinkForm, list, formSubmitAddCard } from './variables.js';
 import { classSettings } from './scripts.js';
-import Popup from './Popup.js';
+import PopupWithImage from './PopupWithImage.js';
+import PopupWithForm from './PopupWithForm.js';
+
+const editButtonPopupElement = new PopupWithForm('.popup_edit_profile', submitFormEditProfile);
+const editionCardButtonPopupElement = new PopupWithForm('.popup_edit_card');
+const popupClickCardPopupElement = new PopupWithImage('.popup_click_card');
+popupClickCardPopupElement.setEventListeners()
 
 const formElementEditProfileValidator = new FormValidator(classSettings, formElementEditProfile);
 const formAddCardValidator = new FormValidator(classSettings, formAddCard);
@@ -20,6 +26,7 @@ const cardList = new Section({
         createCard({name, link})
   }
 }, '.elements__table');
+
 cardList.renderItems();
 
 formAddCard.addEventListener('submit', handleAddCard);
@@ -33,19 +40,21 @@ function handleAddCard(event) {
   event.target.reset();
   formAddCardValidator.toDisableButton()
 };
+
 function createCard({name, link}){
-  const newCard = new Card ({name, link});
+  const newCard = new Card ({name, link}, handleCardClick);
   cardList.addItem(newCard.generateCard());
 };
- 
-const editButtonPopupElement = new Popup('.popup_edit_profile');
-const editionCardButtonPopupElement = new Popup('.popup_edit_card');
-const popupClickCardPopupElement = new Popup('.popup_click_card');
+
+function handleCardClick(nameElement, linkElement) {
+  popupClickCardPopupElement.open(nameElement, linkElement)
+}
 
 editionButton.addEventListener('click', function() {
-  nameInput.value = profileName.textContent;
-  descriptionInput.value = profileDescription.textContent;
+  // nameInput.value = profileName.textContent;
+  // descriptionInput.value = profileDescription.textContent;
   editButtonPopupElement.open();
+  editButtonPopupElement.setEventListeners();
 });
 
 function submitFormEditProfile(event) {

@@ -1,12 +1,13 @@
-import { popupClickCard, popupClickCardPhoto, popupClickCardTitle } from './variables.js';
+// import { popupClickCard, popupClickCardPhoto, popupClickCardTitle } from './variables.js';
 // import { openPopup } from './scripts.js';
 import Popup from './Popup.js'
 
 
 export default class Card {
-    constructor({name, link}){
+    constructor({name, link}, handleCardClick){
         this.name = name,
-        this.link = link
+        this.link = link,
+        this.handleCardClick = handleCardClick
         // this.popupElement = popupElement
     };
 
@@ -37,11 +38,17 @@ export default class Card {
     };
 
     _openCardsPopup(){
-      const popupClickCardPopupElement = new Popup('.popup_click_card');
-      popupClickCardPopupElement.open();
-      popupClickCardPhoto.src = this.link;
-      popupClickCardPhoto.alt = this.name;
-      popupClickCardTitle.textContent = this.name;
+      const nameElement = this.name
+      const linkElement = this.link
+
+      this.handleCardClick(nameElement, linkElement)
+
+      // const popupClickCardPopupElement = new Popup('.popup_click_card');
+      // popupClickCardPopupElement.open();
+      // popupClickCardPhoto.src = this.link;
+      // popupClickCardPhoto.alt = this.name;
+      // popupClickCardTitle.textContent = this.name;
+      // this.handleCardClick.
     };
     
     _removeCard(){
