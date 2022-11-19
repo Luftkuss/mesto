@@ -7,45 +7,41 @@ import { initialCards, editionButton, popupEditProfileCloseButton, formElementEd
 import { classSettings } from './scripts.js';
 import PopupWithImage from './PopupWithImage.js';
 import PopupWithForm from './PopupWithForm.js';
+import UserInfo from './UserInfo.js';
 
-//
+const userInfo = new UserInfo({ nameElement: profileName, descriptionElement: profileDescription });
+
 formElementEditProfile.addEventListener('submit', submitFormEditProfile);
 
-function submitFormEditProfile(contentObject) {
-  // contentObject[0] = nameInput.value;
-  // contentObject[1] = descriptionInput.value;
-    profileName.textContent = nameInput.value;
-    profileDescription.textContent = descriptionInput.value;
+function submitFormEditProfile(editObject) {
+    userInfo.setUserInfo(editObject)
   };
 
 const editButtonPopupElement = new PopupWithForm('.popup_edit_profile', submitFormEditProfile);
+editButtonPopupElement.setEventListeners()
 
 editionButton.addEventListener('click', function() {
-  // nameInput.value = profileName.textContent;
-  // descriptionInput.value = profileDescription.textContent;
+  const contentObj = userInfo.getUserInfo()
+  nameInput.value = contentObj.name;
+  descriptionInput.value = contentObj.description;
   editButtonPopupElement.open();
 });
-//
-//
+
 const editionCardButtonPopupElement = new PopupWithForm('.popup_edit_card', handleAddCard);
+editionCardButtonPopupElement.setEventListeners()
 
 editionCardButton.addEventListener('click', function(){
   editionCardButtonPopupElement.open();
 });
 
-formAddCard.addEventListener('submit', handleAddCard);
-
 function handleAddCard(event) {
-  // event.preventDefault();
   const name = cardNameForm.value;
   const link = cardLinkForm.value;
   createCard({name, link});
   editionCardButtonPopupElement.close();
-  console.log(formSubmitAddCard)
-  event.target.reset();
-  formAddCardValidator.toDisableButton()
+  formAddCardValidator.toDisableButton();
 };
-//
+
 const popupClickCardPopupElement = new PopupWithImage('.popup_click_card');
 popupClickCardPopupElement.setEventListeners()
 
@@ -62,7 +58,6 @@ const cardList = new Section({
         createCard({name, link})
   }
 }, '.elements__table');
-
 cardList.renderItems();
 
 function createCard({name, link}){

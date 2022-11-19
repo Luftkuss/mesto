@@ -11,14 +11,13 @@
 </head>
 
 <body class="page">
-    <header class="header">
-        <img
-            src="./images/header__logo.svg"
-            alt="логотип место"
-            class="header__logo"
-        >
-    </header>
-
+   <header class="header">
+      <img
+        src="./images/header__logo.svg"
+        alt="логотип место"
+        class="header__logo"
+      >
+   </header>
    <main>
         <section class="profile">
             <div class="profile__container">
@@ -27,7 +26,6 @@
                 alt="аватар маяковский"
                 class="profile__avatar"
                 >
-
                 <div class="profile__info">
                     <div class="profile__title-line">
                         <h1 class="profile__title">Маяковский</h1>
@@ -37,7 +35,6 @@
                         alt="редактировать"
                         class="profile__edit-button-image"
                         ></button>
-                        
                     </div>
                     <p class="profile__description">Гражданин Советского Союза.</p>
                 </div>
@@ -70,9 +67,9 @@
             <button id="#close-edit" class="popup__close popup__close-edit"></button>
             <h3 class="popup__title">Редактировать профиль</h3>
             <form action="./" class="popup__form popup__form-profile" novalidate>
-                <input id="name" name="Имя" type="text" class="popup__input popup__input_type_name" placeholder="Имя" minlength="2" maxlength="40" required>
+                <input id="name" name="Имя" type="text" class="popup__input popup__input_type_name popup__editprofile-input_type_name" placeholder="Имя" minlength="2" maxlength="40" required>
                 <span class="popup__input-error name-error">Вы пропустили это поле.</span> 
-                <input id="description" name="Описание" type="text" class="popup__input popup__input_type_description" placeholder="Описание" minlength="2" maxlength="200" required>
+                <input id="description" name="Описание" type="text" class="popup__input popup__input_type_description popup__editprofile-input_type_description" placeholder="Описание" minlength="2" maxlength="200" required>
                 <span class="popup__input-error description-error">Введите адрес сайта.</span> 
                 <button type="submit" class="popup__button">Сохранить</button>
             </form>
@@ -91,7 +88,6 @@
             </form>
         </div>
     </div>
-
     <div class="popup popup_click_card">
         <div class="popup__content-photo">
                 <button id="#close-card" class="popup__close popup__close-cards popup__close_card-content"></button>
@@ -109,20 +105,17 @@
 
     <template class="card-template" id="card-item">
         <li class="card">
-
             <img 
                 src="./images/Trash.svg"
                 alt="удалить"
                 class="card__trash"
-            >
-                    
+            >      
             <img 
                 id="card-link"
                 src="./images/card__sevastopol.png"
                 alt="севастополь"
                 class="card__image"
             >
-            
             <div class="card__content-line">
                 <h2 class="card__title" id="card-name">Севастополь</h2>
 
@@ -143,6 +136,7 @@
     <script type="module" src="./sсripts/Popup.js"></script>
     <script type="module" src="./sсripts/PopupWithImage.js"></script>
     <script type="module" src="./sсripts/PopupWithForm.js"></script>
+    <script type="module" src="./sсripts/UserInfo.js"></script>
     <script type="module" src="./sсripts/index.js"></script>
 </body>
 </html>

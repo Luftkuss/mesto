@@ -1,5 +1,3 @@
-// import { editionCardButton } from './variables.js'
-
 export default class Popup {
     constructor(popupSelector){
         this._popupSelector = popupSelector;
@@ -7,9 +5,6 @@ export default class Popup {
 
     open(){
         document.querySelector(this._popupSelector).classList.add('popup_is_open');
-        // const currentPopup = document.querySelector(this._popupSelector);
-        // this._handleEscClose(currentPopup);
-        this.setEventListeners();
     };
 
     close(){
@@ -29,10 +24,9 @@ export default class Popup {
             this.close();
             })  
         });
-
         document.addEventListener('keyup', (evt) => this._handleEscClose(evt));
     };
-
+    
     _handleEscClose(evt){
         if (evt.key === 'Escape') {
             this.close();
