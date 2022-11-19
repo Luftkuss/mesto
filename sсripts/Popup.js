@@ -7,8 +7,9 @@ export default class Popup {
 
     open(){
         document.querySelector(this._popupSelector).classList.add('popup_is_open');
+        // const currentPopup = document.querySelector(this._popupSelector);
         // this._handleEscClose(currentPopup);
-        // this.setEventListeners(currentPopup);
+        this.setEventListeners();
     };
 
     close(){
@@ -17,13 +18,7 @@ export default class Popup {
     };
 
     setEventListeners(){
-        console.log(this._popupSelector)
-        console.log(this)
-        
-        const currentPopup = document.querySelector(this._popupSelector);
-
         document.querySelector(this._popupSelector).addEventListener('click', (evt) => {
-            console.log(evt.target)
             if (evt.target.classList.contains('popup_is_open')) {
                this.close();
             };

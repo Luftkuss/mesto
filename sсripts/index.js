@@ -8,8 +8,44 @@ import { classSettings } from './scripts.js';
 import PopupWithImage from './PopupWithImage.js';
 import PopupWithForm from './PopupWithForm.js';
 
+//
+formElementEditProfile.addEventListener('submit', submitFormEditProfile);
+
+function submitFormEditProfile(contentObject) {
+  // contentObject[0] = nameInput.value;
+  // contentObject[1] = descriptionInput.value;
+    profileName.textContent = nameInput.value;
+    profileDescription.textContent = descriptionInput.value;
+  };
+
 const editButtonPopupElement = new PopupWithForm('.popup_edit_profile', submitFormEditProfile);
-const editionCardButtonPopupElement = new PopupWithForm('.popup_edit_card');
+
+editionButton.addEventListener('click', function() {
+  // nameInput.value = profileName.textContent;
+  // descriptionInput.value = profileDescription.textContent;
+  editButtonPopupElement.open();
+});
+//
+//
+const editionCardButtonPopupElement = new PopupWithForm('.popup_edit_card', handleAddCard);
+
+editionCardButton.addEventListener('click', function(){
+  editionCardButtonPopupElement.open();
+});
+
+formAddCard.addEventListener('submit', handleAddCard);
+
+function handleAddCard(event) {
+  // event.preventDefault();
+  const name = cardNameForm.value;
+  const link = cardLinkForm.value;
+  createCard({name, link});
+  editionCardButtonPopupElement.close();
+  console.log(formSubmitAddCard)
+  event.target.reset();
+  formAddCardValidator.toDisableButton()
+};
+//
 const popupClickCardPopupElement = new PopupWithImage('.popup_click_card');
 popupClickCardPopupElement.setEventListeners()
 
@@ -29,18 +65,6 @@ const cardList = new Section({
 
 cardList.renderItems();
 
-formAddCard.addEventListener('submit', handleAddCard);
-function handleAddCard(event) {
-  event.preventDefault();
-  const name = cardNameForm.value;
-  const link = cardLinkForm.value;
-  createCard({name, link});
-  editionCardButtonPopupElement.close();
-  console.log(formSubmitAddCard)
-  event.target.reset();
-  formAddCardValidator.toDisableButton()
-};
-
 function createCard({name, link}){
   const newCard = new Card ({name, link}, handleCardClick);
   cardList.addItem(newCard.generateCard());
@@ -49,23 +73,3 @@ function createCard({name, link}){
 function handleCardClick(nameElement, linkElement) {
   popupClickCardPopupElement.open(nameElement, linkElement)
 }
-
-editionButton.addEventListener('click', function() {
-  // nameInput.value = profileName.textContent;
-  // descriptionInput.value = profileDescription.textContent;
-  editButtonPopupElement.open();
-  editButtonPopupElement.setEventListeners();
-});
-
-function submitFormEditProfile(event) {
-  event.preventDefault();
-  profileName.textContent = nameInput.value;
-  profileDescription.textContent = descriptionInput.value;
-  editButtonPopupElement.close();
-};
-
-formElementEditProfile.addEventListener('submit', submitFormEditProfile);
-
-editionCardButton.addEventListener('click', function(){
-  editionCardButtonPopupElement.open();
-});
