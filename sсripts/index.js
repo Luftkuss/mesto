@@ -34,7 +34,7 @@ editionCardButton.addEventListener('click', function(){
   editionCardButtonPopupElement.open();
 });
 
-function handleAddCard(event) {
+function handleAddCard() {
   const name = cardNameForm.value;
   const link = cardLinkForm.value;
   createCard({name, link});
