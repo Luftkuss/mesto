@@ -1,9 +1,9 @@
 import Card from './Card.js';
 import Section from './Section.js';
 import FormValidator from './FormValidator.js';
-import { initialCards, editionButton, popupEditProfileCloseButton, formElementEditProfile, editionCardButton, popupCardCloseButton,
-  popupEditProfile, popupEditCard, popupClickCard, nameInput, profileName, profileDescription, descriptionInput, cardNameForm,
-  cardLinkForm, list, formSubmitAddCard } from './variables.js';
+import { initialCards, editionButton, formElementEditProfile, editionCardButton,
+  nameInput, profileName, profileDescription, descriptionInput, cardNameForm,
+  cardLinkForm} from './variables.js';
 import { classSettings } from './scripts.js';
 import PopupWithImage from './PopupWithImage.js';
 import PopupWithForm from './PopupWithForm.js';
