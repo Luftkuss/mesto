@@ -4,7 +4,7 @@ import Section from './components/Section.js';
 import FormValidator from './components/FormValidator.js';
 import { initialCards, editionButton, formElementEditProfile, editionCardButton,
   nameInput, profileName, profileDescription, descriptionInput, cardNameForm,
-  cardLinkForm, formSubmitAddCard} from './components/variables.js';
+  cardLinkForm } from './components/variables.js';
 import { classSettings } from './components/scripts.js';
 import PopupWithImage from './components/PopupWithImage.js';
 import PopupWithForm from './components/PopupWithForm.js';

@@ -26,8 +26,6 @@ const variables = {
     popup: '.popup',
     popupEditProfileCloseButton: '.popup__close-edit',
     popupCardCloseButton: '.popup__close-add',
-    popupEditProfileName: '.popup__editprofile-input_type_name',
-    popupEditProfileDescription: '.popup__editprofile-input_type_description'
 }
 
 const template = document.querySelector(variables.template).content.querySelector('.card'); 
@@ -56,8 +54,6 @@ export const cardLinkForm = popupEditCard.querySelector(variables.cardLinkForm);
 
 export const popupEditProfileCloseButton = document.querySelector(variables.popupEditProfileCloseButton);
 export const popupCardCloseButton = document.querySelector(variables.popupCardCloseButton);
-export const popupEditProfileName = document.querySelector(variables.popupEditProfileName);
-export const popupEditProfileDescription = document.querySelector(variables.popupEditProfileDescription);
 
 export const initialCards = [
   { name: 'Архыз',
