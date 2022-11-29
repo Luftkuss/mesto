@@ -18,14 +18,14 @@ function submitFormEditProfile(editObject) {
     userInfo.setUserInfo(editObject)
   };
 
-const editButtonPopupElement = new PopupWithForm('.popup_edit_profile', submitFormEditProfile);
-editButtonPopupElement.setEventListeners()
+const рopupEditButtonElement = new PopupWithForm('.popup_edit_profile', submitFormEditProfile);
+рopupEditButtonElement.setEventListeners()
 
 editionButton.addEventListener('click', function() {
   const contentObj = userInfo.getUserInfo()
   nameInput.value = contentObj.name;
   descriptionInput.value = contentObj.description;
-  editButtonPopupElement.open();
+  рopupEditButtonElement.open();
 });
 
 const editionCardButtonPopupElement = new PopupWithForm('.popup_edit_card', handleAddCard);
@@ -35,9 +35,9 @@ editionCardButton.addEventListener('click', function(){
   editionCardButtonPopupElement.open();
 });
 
-function handleAddCard() {
-  const name = cardNameForm.value;
-  const link = cardLinkForm.value;
+function handleAddCard(inputElements) {
+  const name = inputElements.picture;
+  const link = inputElements.url;
   createCard({name, link});
   editionCardButtonPopupElement.close();
   formAddCardValidator.toDisableButton();
