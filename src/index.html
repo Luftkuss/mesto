@@ -8,7 +8,6 @@
     <meta name="description" content="размести город где ты бывал">
     <title>Mesto</title>
 </head>
-
 <body class="page">
    <header class="header">
       <img
@@ -38,29 +37,23 @@
                     <p class="profile__description">Гражданин Советского Союза.</p>
                 </div>
             </div>
-
             <button class="profile__add-button">
                 <img
                     src="<%=require('./images/add-button.svg')%>"
                     alt="добавить"
                     class="profile__add-button-image"
                 >
-            </button>
-            
-                  
+            </button>        
         </section> 
-
         <section class="elements">
             <ul class="elements__table">
                 
             </ul>
         </section>
     </main> 
-
     <footer class="footer">
         <p class="footer__text">&copy; 2022 Mesto Russia</p>
     </footer>
-
     <div class="popup popup_edit_profile">
         <div class="popup__content">
             <button id="#close-edit" class="popup__close popup__close-edit"></button>
@@ -101,7 +94,6 @@
                 </div>
         </div>
     </div>
-
     <template class="card-template" id="card-item">
         <li class="card">
             <img 
@@ -123,20 +115,8 @@
                     alt="лайк"
                     class="card__image-like"
                 >
-                
             </div>
         </li>
     </template>
-
-    <script type="module" src="./sсripts/scripts.js"></script>
-    <script type="module" src="./sсripts/variables.js"></script>
-    <script type="module" src="./sсripts/FormValidator.js"></script>
-    <script type="module" src="./sсripts/Card.js"></script>
-    <script type="module" src="./sсripts/Section.js"></script>
-    <script type="module" src="./sсripts/Popup.js"></script>
-    <script type="module" src="./sсripts/PopupWithImage.js"></script>
-    <script type="module" src="./sсripts/PopupWithForm.js"></script>
-    <script type="module" src="./sсripts/UserInfo.js"></script>
-    <script type="module" src="./sсripts/index.js"></script>
 </body>
 </html>

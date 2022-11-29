@@ -12,7 +12,6 @@ export default class UserInfo {
     }
 
     setUserInfo(editObject){
-        console.log(editObject.name)
         this._nameElement.textContent = editObject.name
         this._descriptionElement.textContent = editObject.description
         this.getUserInfo()

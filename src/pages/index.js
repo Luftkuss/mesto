@@ -1,14 +1,14 @@
-import './pages/index.css';
-import Card from './components/Card.js';
-import Section from './components/Section.js';
-import FormValidator from './components/FormValidator.js';
+import './index.css';
+import Card from '../components/Card.js';
+import Section from '../components/Section.js';
+import FormValidator from '../components/FormValidator.js';
 import { initialCards, editionButton, formElementEditProfile, editionCardButton,
   nameInput, profileName, profileDescription, descriptionInput, cardNameForm,
-  cardLinkForm } from './components/variables.js';
-import { classSettings } from './components/scripts.js';
-import PopupWithImage from './components/PopupWithImage.js';
-import PopupWithForm from './components/PopupWithForm.js';
-import UserInfo from './components/UserInfo.js';
+  cardLinkForm } from '../utils/variables.js';
+import { classSettings } from '../utils/scripts.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
 
 const userInfo = new UserInfo({ nameElement: profileName, descriptionElement: profileDescription });
 
@@ -54,9 +54,9 @@ formAddCardValidator.enableValidation();
 const cardList = new Section({
   items: initialCards,
   renderer: (item) => {
-        const name = item.name;
-        const link = item.link;
-        createCard({name, link})
+      const name = item.name;
+      const link = item.link;
+      createCard({name, link})
   }
 }, '.elements__table');
 cardList.renderItems();

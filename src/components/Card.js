@@ -1,8 +1,11 @@
 export default class Card {
     constructor({name, link}, handleCardClick){
-        this.name = name,
-        this.link = link,
-        this.handleCardClick = handleCardClick
+        this._name = name,
+        this._link = link,
+        this.handleCardClick = handleCardClick,
+        this._like = null,
+        this._element = null,
+        this._image = null // указываем явно, что объект класса карточки обладает атрибутом
     };
 
     _getTemplate(){
@@ -11,16 +14,15 @@ export default class Card {
         .content
         .querySelector('.card')
         .cloneNode(true);
-
         return cardElement
     };
 
     _setEventListeners(){
-        this._element.querySelector('.card__trash').addEventListener('click', () => {
+      this._element.querySelector('.card__trash').addEventListener('click', () => {
           this._removeCard()
         });
 
-        this._element.querySelector('.card__image-like').addEventListener('click', () => {
+        this._like.addEventListener('click', () => {
           this._likeCard()
         });
 
@@ -32,25 +34,27 @@ export default class Card {
     };
 
     _openCardsPopup(){
-      const nameElement = this.name
-      const linkElement = this.link
+      const nameElement = this._name
+      const linkElement = this._link
       this.handleCardClick(nameElement, linkElement)
     };
     
     _removeCard(){
-        this._element.remove();
+      this._element.remove();
     };
 
     _likeCard(){
-        this._element.querySelector('.card__image-like').classList.toggle('card__image-like_liked');
+      this._like.classList.toggle('card__image-like_liked'); 
     };
 
     generateCard(){
         this._element = this._getTemplate();
+        this._like = this._element.querySelector('.card__image-like')
+        this._image = this._element.querySelector('.card__image')
         this._setEventListeners();
-        this._element.querySelector('.card__title').textContent = this.name;
-        this._element.querySelector('.card__image').src = this.link;
-        this._element.querySelector('.card__image').alt = this.name;
+        this._element.querySelector('.card__title').textContent = this._name;
+        this._image.src = this._link;
+        this._image.alt = this._name;
         return this._element;
     };
 };
