@@ -59,6 +59,7 @@ const cardList = new Section({
       createCard({name, link})
   }
 }, '.elements__table');
+
 cardList.renderItems();
 
 function createCard({name, link}){
