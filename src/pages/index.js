@@ -25,6 +25,16 @@ api.getUserInformation()
     userInfo.setUserInfo({name: res.name, description: res.about})
   })
 
+api.getCards()
+.then(res => {
+  const cardsList = res
+  cardsList.forEach((item) => {
+    console.log(item)
+    const name = item.name;
+    const link = item.link;
+    createCard({name, link})
+  })
+})
  
 
 const userInfo = new UserInfo({ nameElement: profileName, descriptionElement: profileDescription });

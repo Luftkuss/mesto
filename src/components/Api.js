@@ -5,12 +5,32 @@ export default class Api {
     }
 
     getUserInformation(){
-      console.log('getUserInformation')
-      return this.test = fetch("https://nomoreparties.co/v1/cohort-54/users/me", {
+      return fetch("https://nomoreparties.co/v1/cohort-54/users/me", {
           headers: this._headers
       })
       .then(res => res.ok ? res.json() : Promise.reject(res.status))
       .catch(console.log)
+    }
+
+    getCards(){
+      console.log('getCards')
+      return fetch("https://mesto.nomoreparties.co/v1/cohort-54/cards ", {
+        headers: this._headers
+      })
+      .then(res => res.ok ? res.json() : Promise.reject(res.status))
+      .catch(console.log)
+    }
+
+    editUserInformation(){
+      return fetch("https://nomoreparties.co/v1/cohort-54/users/me", {
+        method: 'PATCH',
+        headers: this._headers,
+        body: JSON.stringify({
+          name: 'Marie Skłodowska Curie',
+          about: 'Physicist and Chemist'
+        })
+      })
+
     }
 
   //   получить список всех карточек в виде массива (GET)

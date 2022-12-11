@@ -5,7 +5,7 @@ export default class Card {
         this.handleCardClick = handleCardClick,
         this._like = null,
         this._element = null,
-        this._image = null // указываем явно, что объект класса карточки обладает атрибутом
+        this._image = null
     };
 
     _getTemplate(){
