@@ -8,6 +8,7 @@ import { initialCards, editionButton, formElementEditProfile, editionCardButton,
 import { classSettings } from '../utils/scripts.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithSubmit from '../components/PopupWithSubmit.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
 
@@ -74,9 +75,13 @@ function handleAddCard(inputElements) {
 
 const popupClickCardPopupElement = new PopupWithImage('.popup_click_card');
 popupClickCardPopupElement.setEventListeners()
-
-const popupConfirmDelete = new PopupWithImage('.popup_confirm_delete');
+// 
+const popupConfirmDelete = new PopupWithSubmit('.popup_confirm_delete', handleSubmitDeleteCard);
 popupConfirmDelete.setEventListeners()
+
+function handleSubmitDeleteCard(){
+  console.log('1')
+}
 
 const formElementEditProfileValidator = new FormValidator(classSettings, formElementEditProfile);
 const formAddCardValidator = new FormValidator(classSettings, formAddCard);
@@ -96,12 +101,17 @@ const cardList = new Section({
 cardList.renderItems();
 
 function createCard({name, link, likes}){
-  const newCard = new Card ({name, link, likes}, handleCardClick);
+  const newCard = new Card ({name, link, likes}, handleCardClick, handleDeleteCard);
   cardList.addItem(newCard.generateCard());
 };
 
 function handleCardClick(nameElement, linkElement) {
   popupClickCardPopupElement.open(nameElement, linkElement)
+}
+
+function handleDeleteCard() {
+  console.log("clicked")
+  popupConfirmDelete.open()
 }
 
 // formElementEditProfile.addEventListener('submit', submitFormEditProfile);

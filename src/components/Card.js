@@ -1,9 +1,10 @@
 export default class Card {
-    constructor({name, link, likes}, handleCardClick){
+    constructor({name, link, likes}, handleCardClick, handleDeleteCard){
         this._name = name,
         this._link = link,
         this._likes = likes
         this.handleCardClick = handleCardClick,
+        this._handleDeleteCard = handleDeleteCard,
         this._like = null,
         this._element = null,
         this._image = null
@@ -19,9 +20,16 @@ export default class Card {
     };
 
     _setEventListeners(){
-      this._element.querySelector('.card__trash').addEventListener('click', () => {
-          this._removeCard()
+        this._element.querySelector('.card__trash').addEventListener('click', () => {
+          // this._removeCard()
+          this._handleDeleteCard()
         });
+
+        // this._element.querySelector('.popup__button-confirm').addEventListener('click', () => {
+        //   // this._removeCard()
+        //   // this.handleDeleteCard()
+        //   // console.log(1)
+        // });
 
         this._like.addEventListener('click', () => {
           this._likeCard()
