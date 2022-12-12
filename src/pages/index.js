@@ -21,28 +21,29 @@ const api = new Api({
 
 api.getUserInformation()
   .then(res => {
-    console.log('Ответ', res)
     userInfo.setUserInfo({name: res.name, description: res.about})
   })
 
 api.getCards()
 .then(res => {
+  // console.log(res)
   const cardsList = res
   cardsList.forEach((item) => {
-    console.log(item)
     const name = item.name;
     const link = item.link;
-    createCard({name, link})
+    const likes = item.likes;
+    createCard({name, link, likes})
   })
 })
- 
+
+
 
 const userInfo = new UserInfo({ nameElement: profileName, descriptionElement: profileDescription });
 
-formElementEditProfile.addEventListener('submit', submitFormEditProfile);
-
 function submitFormEditProfile(editObject) {
-    // userInfo.setUserInfo(editObject)
+    api.editUserInformation(editObject)
+    .then(res => res.json())
+    .then(userInfo.setUserInfo(editObject))
   };
 
 const рopupEditButtonElement = new PopupWithForm('.popup_edit_profile', submitFormEditProfile);
@@ -65,7 +66,8 @@ editionCardButton.addEventListener('click', function(){
 function handleAddCard(inputElements) {
   const name = inputElements.picture;
   const link = inputElements.url;
-  createCard({name, link});
+  createCard({name, link, likes});
+  api.uploadCard({name, link})
   editionCardButtonPopupElement.close();
   formAddCardValidator.toDisableButton();
 };
@@ -73,27 +75,33 @@ function handleAddCard(inputElements) {
 const popupClickCardPopupElement = new PopupWithImage('.popup_click_card');
 popupClickCardPopupElement.setEventListeners()
 
+const popupConfirmDelete = new PopupWithImage('.popup_confirm_delete');
+popupConfirmDelete.setEventListeners()
+
 const formElementEditProfileValidator = new FormValidator(classSettings, formElementEditProfile);
 const formAddCardValidator = new FormValidator(classSettings, formAddCard);
 formElementEditProfileValidator.enableValidation();
 formAddCardValidator.enableValidation();
 
 const cardList = new Section({
-  items: initialCards,
+  items: '',
   renderer: (item) => {
       const name = item.name;
       const link = item.link;
-      createCard({name, link})
-  }
+      const likes = item.likes;
+      createCard({name, link, likes})
+  }  
 }, '.elements__table');
 
 cardList.renderItems();
 
-function createCard({name, link}){
-  const newCard = new Card ({name, link}, handleCardClick);
+function createCard({name, link, likes}){
+  const newCard = new Card ({name, link, likes}, handleCardClick);
   cardList.addItem(newCard.generateCard());
 };
 
 function handleCardClick(nameElement, linkElement) {
   popupClickCardPopupElement.open(nameElement, linkElement)
 }
+
+// formElementEditProfile.addEventListener('submit', submitFormEditProfile);

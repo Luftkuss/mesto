@@ -13,35 +13,56 @@ export default class Api {
     }
 
     getCards(){
-      console.log('getCards')
-      return fetch("https://mesto.nomoreparties.co/v1/cohort-54/cards ", {
+      return fetch("https://mesto.nomoreparties.co/v1/cohort-54/cards", {
         headers: this._headers
       })
       .then(res => res.ok ? res.json() : Promise.reject(res.status))
       .catch(console.log)
     }
-
-    editUserInformation(){
+    
+    editUserInformation(object){
       return fetch("https://nomoreparties.co/v1/cohort-54/users/me", {
         method: 'PATCH',
         headers: this._headers,
         body: JSON.stringify({
-          name: 'Marie Skłodowska Curie',
-          about: 'Physicist and Chemist'
+          name: object.name,
+          about: object.description
         })
       })
-
     }
 
-  //   получить список всех карточек в виде массива (GET)
+    uploadCard(object){
+      return fetch("https://mesto.nomoreparties.co/v1/cohort-54/cards", {
+        method: 'POST',
+        headers: this._headers,
+        body: JSON.stringify({
+          name: object.name,
+          link: object.link
+        })
+      })
+    }
 
-  // добавить карточку (POST)
+    getLikeCard(){
+      console.log('getLikeCard')
+      return fetch("https://mesto.nomoreparties.co/v1/cohort-54/cards", {
+        method: "PUT",
+        headers: this._headers,
+        body: JSON.stringify({
+          name: object.name,
+          link: object.link
+        })
+      })
+    }
+
+
+
+
 
   // удалить карточку (DELETE)
 
-  // получить данные пользователя (GET) DONE
 
-  // аменить данные пользователя (PATCH)
+
+
 
   // заменить аватар (PATCH)
 

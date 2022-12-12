@@ -1,7 +1,8 @@
 export default class Card {
-    constructor({name, link}, handleCardClick){
+    constructor({name, link, likes}, handleCardClick){
         this._name = name,
         this._link = link,
+        this._likes = likes
         this.handleCardClick = handleCardClick,
         this._like = null,
         this._element = null,
@@ -47,6 +48,12 @@ export default class Card {
       this._like.classList.toggle('card__image-like_liked'); 
     };
 
+    _setLike(){
+      const likesCounterElement = this._element.querySelector('.card__likes-counter');
+      likesCounterElement.textContent = this._likes.length
+      console.log(this._likes)
+    }
+
     generateCard(){
         this._element = this._getTemplate();
         this._like = this._element.querySelector('.card__image-like')
@@ -55,6 +62,7 @@ export default class Card {
         this._element.querySelector('.card__title').textContent = this._name;
         this._image.src = this._link;
         this._image.alt = this._name;
+        this._setLike()
         return this._element;
     };
 };

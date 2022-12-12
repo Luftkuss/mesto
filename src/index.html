@@ -17,6 +17,33 @@
       >
    </header>
    <main>
+    <!-- <div class="card-template" id="card-item">
+        <li class="card">
+            <img 
+                src="<%=require('./images/Trash.svg')%>"
+                alt="удалить"
+                class="card__trash"
+            >      
+            <img 
+                id="card-link"
+                src="<%=require('./images/эльбрус.png')%>"
+                alt="Эльбрус"
+                class="card__image"
+            >
+            <div class="card__content-line">
+                <h2 class="card__title" id="card-name">Эльбрус</h2>
+
+                <div class="card__likes-content">
+                <img
+                    src="<%=require('./images/like_disabled.svg')%>"
+                    alt="лайк"
+                    class="card__image-like"
+                >
+                <p class="card__likes-counter">1</p>
+                </div>
+            </div>
+        </li>
+    </div> -->
         <section class="profile">
             <div class="profile__container">
                 <img
@@ -110,13 +137,23 @@
             <div class="card__content-line">
                 <h2 class="card__title" id="card-name">Эльбрус</h2>
 
-                <img
-                    src="<%=require('./images/like_disabled.svg')%>"
-                    alt="лайк"
-                    class="card__image-like"
-                >
+                <div class="card__likes-content">
+                    <img
+                        src="<%=require('./images/like_disabled.svg')%>"
+                        alt="лайк"
+                        class="card__image-like"
+                    >
+                    <p class="card__likes-counter">1</p>
+                    </div>
             </div>
         </li>
     </template>
+    <div class="popup popup_confirm_delete">
+        <div class="popup__content popup_content-size">
+            <button id="#close-edit" class="popup__close popup__close-edit"></button>
+            <h3 class="popup__title">Вы уверены?</h3>
+            <button type="submit" class="popup__button popup__button-confirm">Да</button>
+        </div>
+    </div>
 </body>
 </html>
