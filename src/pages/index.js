@@ -20,24 +20,44 @@ const api = new Api({
   }
 });
 
+function userId(inform){
+ const myId = inform
+ return myId
+}
+
+
+// let myId
+// let promise = new Promise((resolve, reject) => {
+//   resolve();
+// });
+
+
 api.getUserInformation()
   .then(res => {
+    // console.log(res)
     userInfo.setUserInfo({name: res.name, description: res.about})
+    // myId = res._id
+    // userId(res._id)
+    userId(res._id)
   })
 
 api.getCards()
 .then(res => {
-  // console.log(res)
   const cardsList = res
+  // console.log(myId)
   cardsList.forEach((item) => {
+    // console.log(myId)
     const name = item.name;
     const link = item.link;
     const likes = item.likes;
-    createCard({name, link, likes})
+    const id = item._id;
+    const myId = userId(inform);
+    console.log(myId) 
+    const ownerId = item.owner._id; 
+    // console.log(ownerId) 
+    createCard({name, link, likes, id, ownerId  })
   })
 })
-
-
 
 const userInfo = new UserInfo({ nameElement: profileName, descriptionElement: profileDescription });
 
@@ -65,22 +85,24 @@ editionCardButton.addEventListener('click', function(){
 });
 
 function handleAddCard(inputElements) {
-  const name = inputElements.picture;
-  const link = inputElements.url;
-  createCard({name, link, likes});
-  api.uploadCard({name, link})
+  api.uploadCard({ name: inputElements.picture, link: inputElements.url })
+  .then(res => {
+    createCard(res);
+  })
   editionCardButtonPopupElement.close();
   formAddCardValidator.toDisableButton();
 };
 
 const popupClickCardPopupElement = new PopupWithImage('.popup_click_card');
 popupClickCardPopupElement.setEventListeners()
-// 
+
 const popupConfirmDelete = new PopupWithSubmit('.popup_confirm_delete', handleSubmitDeleteCard);
 popupConfirmDelete.setEventListeners()
 
-function handleSubmitDeleteCard(){
-  console.log('1')
+function handleSubmitDeleteCard(id){
+  api.deleteCard(id)
+  cardList.getItemById(id).removeCard()
+  popupConfirmDelete.close()
 }
 
 const formElementEditProfileValidator = new FormValidator(classSettings, formElementEditProfile);
@@ -89,29 +111,33 @@ formElementEditProfileValidator.enableValidation();
 formAddCardValidator.enableValidation();
 
 const cardList = new Section({
-  items: '',
+  items: [],
   renderer: (item) => {
       const name = item.name;
       const link = item.link;
       const likes = item.likes;
-      createCard({name, link, likes})
+      const id = item._id;
+      const myId = myId;
+      const ownerId = item.owner.id; 
+      return createCard({name, link, likes, id, myId, ownerId})
   }  
 }, '.elements__table');
 
 cardList.renderItems();
 
-function createCard({name, link, likes}){
-  const newCard = new Card ({name, link, likes}, handleCardClick, handleDeleteCard);
-  cardList.addItem(newCard.generateCard());
+function createCard({name, link, likes, id, myId, ownerId}){
+  const newCard = new Card ({name, link, likes, id, myId, ownerId}, handleCardClick, handleDeleteCard);
+  cardList.addItem(newCard.generateCard(), newCard);
+  // console.log(newCard)
+  return newCard
 };
 
 function handleCardClick(nameElement, linkElement) {
   popupClickCardPopupElement.open(nameElement, linkElement)
 }
 
-function handleDeleteCard() {
-  console.log("clicked")
+function handleDeleteCard(id) {
+  popupConfirmDelete.setId(id)
   popupConfirmDelete.open()
 }
 
-// formElementEditProfile.addEventListener('submit', submitFormEditProfile);

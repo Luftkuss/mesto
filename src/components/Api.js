@@ -32,6 +32,7 @@ export default class Api {
     }
 
     uploadCard(object){
+      console.log(object)
       return fetch("https://mesto.nomoreparties.co/v1/cohort-54/cards", {
         method: 'POST',
         headers: this._headers,
@@ -40,7 +41,19 @@ export default class Api {
           link: object.link
         })
       })
+      .then(res => res.ok ? res.json() : Promise.reject(res.status))
+      .catch(console.log)
     }
+
+    deleteCard(id){
+      return fetch(`https://mesto.nomoreparties.co/v1/cohort-54/cards/${id}`, {
+        method: 'DELETE',
+        headers: this._headers,
+      })
+      .then(res => res.ok ? res.json() : Promise.reject(res.status))
+      .catch(console.log)
+    }
+    
 
     getLikeCard(){
       console.log('getLikeCard')

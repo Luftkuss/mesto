@@ -1,13 +1,18 @@
 export default class Card {
-    constructor({name, link, likes}, handleCardClick, handleDeleteCard){
+    constructor({name, link, likes, id, myId, ownerId}, handleCardClick, handleDeleteCard){
         this._name = name,
         this._link = link,
-        this._likes = likes
+        this._likes = likes,
+        this._id = id,
+        this.myId = myId,
+        this.ownerId = ownerId,
         this.handleCardClick = handleCardClick,
         this._handleDeleteCard = handleDeleteCard,
         this._like = null,
         this._element = null,
         this._image = null
+
+        // console.log(myId)
     };
 
     _getTemplate(){
@@ -21,15 +26,8 @@ export default class Card {
 
     _setEventListeners(){
         this._element.querySelector('.card__trash').addEventListener('click', () => {
-          // this._removeCard()
-          this._handleDeleteCard()
+          this._handleDeleteCard(this._id, this._element)
         });
-
-        // this._element.querySelector('.popup__button-confirm').addEventListener('click', () => {
-        //   // this._removeCard()
-        //   // this.handleDeleteCard()
-        //   // console.log(1)
-        // });
 
         this._like.addEventListener('click', () => {
           this._likeCard()
@@ -48,7 +46,7 @@ export default class Card {
       this.handleCardClick(nameElement, linkElement)
     };
     
-    _removeCard(){
+    removeCard(){
       this._element.remove();
     };
 
@@ -59,7 +57,6 @@ export default class Card {
     _setLike(){
       const likesCounterElement = this._element.querySelector('.card__likes-counter');
       likesCounterElement.textContent = this._likes.length
-      console.log(this._likes)
     }
 
     generateCard(){

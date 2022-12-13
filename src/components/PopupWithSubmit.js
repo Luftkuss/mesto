@@ -5,25 +5,26 @@ export default class PopupWithSubmit extends Popup {
         super(popupSelector)
         this._callbackSubmit = callbackSubmit,
         this._popupSelector = popupSelector
-    }
-    
-    // _getInputValues(){
-    //     // const inputValues = {}
-    //     // const formElement = document.querySelector(this._popupSelector).querySelectorAll('input');
-    //     // formElement.forEach(input => {
-    //     //     return inputValues[input.id] = input.value
-    //     // })
-    //     // return inputValues
-    // }
+        this._id = null,
+        this._card = null
+        }
 
     setEventListeners(){
         super.setEventListeners()
-        console.log(2)
 
         document.querySelector(this._popupSelector).addEventListener('submit', (evt) => {
             evt.preventDefault();
+            this._callbackSubmit(this._id)
             console.log(1)
         })
+    }
+
+    setId(id){
+        this._id = id
+    }
+
+    deleteCard(card){
+        this._card = card
     }
 
     close(){
