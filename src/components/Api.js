@@ -49,37 +49,26 @@ export default class Api {
       return fetch(`https://mesto.nomoreparties.co/v1/cohort-54/cards/${id}`, {
         method: 'DELETE',
         headers: this._headers,
-      })
+      }).then(res => res.ok ? res.json() : Promise.reject(res.status))
+      .catch(console.log)
+    }
+
+    doLike(id){
+      console.log('getLikeCard') 
+      return fetch(`https://mesto.nomoreparties.co/v1/cohort-54/cards/${id}/likes`, {
+        method: "PUT",
+        headers: this._headers,
+      }) 
       .then(res => res.ok ? res.json() : Promise.reject(res.status))
       .catch(console.log)
     }
-    
 
-    getLikeCard(){
-      console.log('getLikeCard')
-      return fetch("https://mesto.nomoreparties.co/v1/cohort-54/cards", {
-        method: "PUT",
+    deleteLike(id){
+      console.log('deleteLikeCard') 
+      return fetch(`https://mesto.nomoreparties.co/v1/cohort-54/cards/${id}/likes`, {
+        method: "DELETE",
         headers: this._headers,
-        body: JSON.stringify({
-          name: object.name,
-          link: object.link
-        })
-      })
+      }) 
     }
-
-
-
-
-
-  // удалить карточку (DELETE)
-
-
-
-
-
   // заменить аватар (PATCH)
-
-  // “ залайкать” карточку (PUT)
-
-  // удалить лайк карточки (DELETE)
   }

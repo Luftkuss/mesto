@@ -20,43 +20,14 @@ const api = new Api({
   }
 });
 
-function userId(inform){
- const myId = inform
- return myId
-}
-
-
-// let myId
-// let promise = new Promise((resolve, reject) => {
-//   resolve();
-// });
-
-
 api.getUserInformation()
   .then(res => {
-    // console.log(res)
-    userInfo.setUserInfo({name: res.name, description: res.about})
-    // myId = res._id
-    // userId(res._id)
-    userId(res._id)
+    userInfo.setUserInfo(res)
   })
 
 api.getCards()
-.then(res => {
-  const cardsList = res
-  // console.log(myId)
-  cardsList.forEach((item) => {
-    // console.log(myId)
-    const name = item.name;
-    const link = item.link;
-    const likes = item.likes;
-    const id = item._id;
-    const myId = userId(inform);
-    console.log(myId) 
-    const ownerId = item.owner._id; 
-    // console.log(ownerId) 
-    createCard({name, link, likes, id, ownerId  })
-  })
+  .then(res => {
+    res.forEach(createCard)
 })
 
 const userInfo = new UserInfo({ nameElement: profileName, descriptionElement: profileDescription });
@@ -87,6 +58,7 @@ editionCardButton.addEventListener('click', function(){
 function handleAddCard(inputElements) {
   api.uploadCard({ name: inputElements.picture, link: inputElements.url })
   .then(res => {
+    res.trashExist = res.owner._id === userInfo.getUserInfo()._id
     createCard(res);
   })
   editionCardButtonPopupElement.close();
@@ -116,28 +88,41 @@ const cardList = new Section({
       const name = item.name;
       const link = item.link;
       const likes = item.likes;
-      const id = item._id;
-      const myId = myId;
-      const ownerId = item.owner.id; 
-      return createCard({name, link, likes, id, myId, ownerId})
+      return createCard({name, link, likes})
   }  
 }, '.elements__table');
 
 cardList.renderItems();
 
-function createCard({name, link, likes, id, myId, ownerId}){
-  const newCard = new Card ({name, link, likes, id, myId, ownerId}, handleCardClick, handleDeleteCard);
+function createCard({ name, link, likes, _id, owner }){
+  const trashExist = owner._id === userInfo.getUserInfo()._id
+  const usersId = userInfo.getUserInfo()._id
+  const newCard = new Card ({ name, link, likes, _id, trashExist, usersId }, handleCardClick, handleDeleteCard, (id) => {
+
+    if(newCard.isCardLiked()){
+      api.deleteLike(id)
+    .then(res => {
+      newCard.setLike(res.likes)
+    })
+    } else {
+      api.doLike(id)
+      .then(res => {
+      newCard.setLike(res.likes)
+    })
+
+    }
+
+  
+  });
   cardList.addItem(newCard.generateCard(), newCard);
-  // console.log(newCard)
   return newCard
 };
 
 function handleCardClick(nameElement, linkElement) {
   popupClickCardPopupElement.open(nameElement, linkElement)
 }
-
+ 
 function handleDeleteCard(id) {
   popupConfirmDelete.setId(id)
   popupConfirmDelete.open()
 }
-
