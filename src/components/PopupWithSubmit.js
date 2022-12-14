@@ -11,11 +11,10 @@ export default class PopupWithSubmit extends Popup {
 
     setEventListeners(){
         super.setEventListeners()
-
+        
         document.querySelector(this._popupSelector).addEventListener('submit', (evt) => {
             evt.preventDefault();
             this._callbackSubmit(this._id)
-            console.log(1)
         })
     }
 

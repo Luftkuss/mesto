@@ -2,9 +2,9 @@ import './index.css';
 import Card from '../components/Card.js';
 import Section from '../components/Section.js';
 import FormValidator from '../components/FormValidator.js';
-import { initialCards, editionButton, formElementEditProfile, editionCardButton,
-  nameInput, profileName, profileDescription, descriptionInput, cardNameForm,
-  cardLinkForm } from '../utils/variables.js';
+import { formElementEditAvatar, editionButton, formElementEditProfile, editionCardButton,
+  nameInput, profileName, profileDescription, descriptionInput, avatarButton,
+  profileAvatar, popupButtonAddAvatar, formSubmitAddCard, popupEditProfile, popupButtonEditProfile } from '../utils/variables.js';
 import { classSettings } from '../utils/scripts.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
@@ -30,15 +30,17 @@ api.getCards()
     res.forEach(createCard)
 })
 
-const userInfo = new UserInfo({ nameElement: profileName, descriptionElement: profileDescription });
+const userInfo = new UserInfo({ nameElement: profileName, descriptionElement: profileDescription, avatarElement: profileAvatar });
 
 function submitFormEditProfile(editObject) {
+    рopupEditButtonElement.sendingInform(true, 'Сохранение...')
     api.editUserInformation(editObject)
     .then(res => res.json())
     .then(userInfo.setUserInfo(editObject))
+    .finally(() => рopupEditButtonElement.sendingInform(false))
   };
 
-const рopupEditButtonElement = new PopupWithForm('.popup_edit_profile', submitFormEditProfile);
+const рopupEditButtonElement = new PopupWithForm('.popup_edit_profile', submitFormEditProfile, popupButtonEditProfile);
 рopupEditButtonElement.setEventListeners()
 
 editionButton.addEventListener('click', function() {
@@ -48,7 +50,7 @@ editionButton.addEventListener('click', function() {
   рopupEditButtonElement.open();
 });
 
-const editionCardButtonPopupElement = new PopupWithForm('.popup_edit_card', handleAddCard);
+const editionCardButtonPopupElement = new PopupWithForm('.popup_edit_card', handleAddCard, formSubmitAddCard);
 editionCardButtonPopupElement.setEventListeners()
 
 editionCardButton.addEventListener('click', function(){
@@ -56,11 +58,13 @@ editionCardButton.addEventListener('click', function(){
 });
 
 function handleAddCard(inputElements) {
+  editionCardButtonPopupElement.sendingInform(true, 'Сохранение...')
   api.uploadCard({ name: inputElements.picture, link: inputElements.url })
   .then(res => {
     res.trashExist = res.owner._id === userInfo.getUserInfo()._id
     createCard(res);
   })
+  .finally(() => editionCardButtonPopupElement.sendingInform(false))
   editionCardButtonPopupElement.close();
   formAddCardValidator.toDisableButton();
 };
@@ -71,6 +75,20 @@ popupClickCardPopupElement.setEventListeners()
 const popupConfirmDelete = new PopupWithSubmit('.popup_confirm_delete', handleSubmitDeleteCard);
 popupConfirmDelete.setEventListeners()
 
+const popupChangeAvatar = new PopupWithForm('.popup_edit_avatar', handleSubmitChangeAvatar, popupButtonAddAvatar);
+popupChangeAvatar.setEventListeners()
+
+avatarButton.addEventListener('click', function(){
+  popupChangeAvatar.open();
+});
+
+function handleSubmitChangeAvatar(editObject){
+  popupChangeAvatar.sendingInform(true, 'Сохранение...')
+  api.changeAvatar(editObject)
+  .then(userInfo.setUserAvatar(editObject))
+  .finally(() => popupChangeAvatar.sendingInform(false))
+}
+
 function handleSubmitDeleteCard(id){
   api.deleteCard(id)
   cardList.getItemById(id).removeCard()
@@ -79,8 +97,10 @@ function handleSubmitDeleteCard(id){
 
 const formElementEditProfileValidator = new FormValidator(classSettings, formElementEditProfile);
 const formAddCardValidator = new FormValidator(classSettings, formAddCard);
+const formAddAvatar = new FormValidator(classSettings, formElementEditAvatar);
 formElementEditProfileValidator.enableValidation();
 formAddCardValidator.enableValidation();
+formAddAvatar.enableValidation();
 
 const cardList = new Section({
   items: [],
@@ -98,10 +118,9 @@ function createCard({ name, link, likes, _id, owner }){
   const trashExist = owner._id === userInfo.getUserInfo()._id
   const usersId = userInfo.getUserInfo()._id
   const newCard = new Card ({ name, link, likes, _id, trashExist, usersId }, handleCardClick, handleDeleteCard, (id) => {
-
     if(newCard.isCardLiked()){
       api.deleteLike(id)
-    .then(res => {
+      .then(res => {
       newCard.setLike(res.likes)
     })
     } else {
@@ -109,10 +128,7 @@ function createCard({ name, link, likes, _id, owner }){
       .then(res => {
       newCard.setLike(res.likes)
     })
-
-    }
-
-  
+  }
   });
   cardList.addItem(newCard.generateCard(), newCard);
   return newCard

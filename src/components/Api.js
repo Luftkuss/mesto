@@ -54,21 +54,32 @@ export default class Api {
     }
 
     doLike(id){
-      console.log('getLikeCard') 
       return fetch(`https://mesto.nomoreparties.co/v1/cohort-54/cards/${id}/likes`, {
         method: "PUT",
-        headers: this._headers,
+        headers: this._headers
       }) 
       .then(res => res.ok ? res.json() : Promise.reject(res.status))
       .catch(console.log)
     }
 
     deleteLike(id){
-      console.log('deleteLikeCard') 
       return fetch(`https://mesto.nomoreparties.co/v1/cohort-54/cards/${id}/likes`, {
         method: "DELETE",
-        headers: this._headers,
+        headers: this._headers
       }) 
+      .then(res => res.ok ? res.json() : Promise.reject(res.status))
+      .catch(console.log)
     }
-  // заменить аватар (PATCH)
+
+    changeAvatar(object){
+      return fetch("https://mesto.nomoreparties.co/v1/cohort-54/users/me/avatar", {
+        method: "PATCH",
+        headers: this._headers,
+        body: JSON.stringify({
+          avatar: object.url
+        })
+      }) 
+      .then(res => res.ok ? res.json() : Promise.reject(res.status))
+      .catch(console.log)
+    }
   }
