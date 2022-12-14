@@ -67,4 +67,4 @@
 @import url(../blocks/popup/_confirm/_delete/popup_confirm_delete.css);
 @import url(../blocks/popup/__button-confirm/popup__button-confirm.css);
 @import url(../blocks/popup/_edit/_avatar/popup_edit_avatar.css);
-@import url(../blocks/popup/_edit/_avatar-size/popup_edit_avatar-size.css);
+@import url(../blocks/popup/__content-avatar/popup__content-avatar.css);
