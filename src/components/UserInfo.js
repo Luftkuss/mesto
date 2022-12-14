@@ -25,7 +25,7 @@ export default class UserInfo {
     }
 
     setUserAvatar(editObject) {
-        this._avatarElement.src = editObject.url
+        this._avatarElement.src = editObject.link
         this._avatar = editObject.avatar
     }
 }

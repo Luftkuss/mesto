@@ -32,7 +32,6 @@ export default class Api {
     }
 
     uploadCard(object){
-      console.log(object)
       return fetch("https://mesto.nomoreparties.co/v1/cohort-54/cards", {
         method: 'POST',
         headers: this._headers,
@@ -76,7 +75,7 @@ export default class Api {
         method: "PATCH",
         headers: this._headers,
         body: JSON.stringify({
-          avatar: object.url
+          avatar: object.link
         })
       }) 
       .then(res => res.ok ? res.json() : Promise.reject(res.status))
