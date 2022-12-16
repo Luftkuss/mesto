@@ -4,7 +4,7 @@ import Section from '../components/Section.js';
 import FormValidator from '../components/FormValidator.js';
 import { formElementEditAvatar, editionButton, formElementEditProfile, editionCardButton,
   nameInput, profileName, profileDescription, descriptionInput, avatarButton,
-  profileAvatar, popupButtonAddAvatar, formSubmitAddCard, popupEditProfile, popupButtonEditProfile } from '../utils/variables.js';
+  profileAvatar, popupButtonAddAvatar, formSubmitAddCard, popupEditProfile, popupButtonEditProfile, cardElement, cardItem } from '../utils/variables.js';
 import { classSettings } from '../utils/scripts.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
@@ -20,23 +20,24 @@ const api = new Api({
   }
 });
 
-api.getUserInformation()
-  .then(res => {
-    userInfo.setUserInfo(res)
+Promise.all([api.getUserInformation(), api.getCards()])
+  .then(([userData, cards]) => {
+      userInfo.setUserInfo(userData)
+      cards.forEach(createCard)
   })
+  .catch(err => console.log(err))
 
-api.getCards()
-  .then(res => {
-    res.forEach(createCard)
-})
 
 const userInfo = new UserInfo({ nameElement: profileName, descriptionElement: profileDescription, avatarElement: profileAvatar });
 
 function submitFormEditProfile(editObject) {
     рopupEditButtonElement.sendingInform(true, 'Сохранение...')
     api.editUserInformation(editObject)
-    .then(res => res.json())
-    .then(userInfo.setUserInfo(editObject))
+    .then((res) => {
+      userInfo.setUserInfo(res)
+      рopupEditButtonElement.close()
+    })
+    .catch(err => console.log(err))
     .finally(() => рopupEditButtonElement.sendingInform(false))
   };
 
@@ -48,6 +49,7 @@ editionButton.addEventListener('click', function() {
   nameInput.value = contentObj.name;
   descriptionInput.value = contentObj.description;
   рopupEditButtonElement.open();
+  formElementEditProfileValidator.toDisableButton();
 });
 
 const editionCardButtonPopupElement = new PopupWithForm('.popup_edit_card', handleAddCard, formSubmitAddCard);
@@ -55,6 +57,7 @@ editionCardButtonPopupElement.setEventListeners()
 
 editionCardButton.addEventListener('click', function(){
   editionCardButtonPopupElement.open();
+  formAddCardValidator.toDisableButton();
 });
 
 function handleAddCard(inputElements) {
@@ -63,11 +66,12 @@ function handleAddCard(inputElements) {
   .then(res => {
     res.trashExist = res.owner._id === userInfo.getUserInfo()._id
     createCard(res);
+    editionCardButtonPopupElement.close()
   })
+  .catch(err => console.log(err))
   .finally(() => editionCardButtonPopupElement.sendingInform(false))
-  editionCardButtonPopupElement.close();
-  formAddCardValidator.toDisableButton();
 };
+
 
 const popupClickCardPopupElement = new PopupWithImage('.popup_click_card');
 popupClickCardPopupElement.setEventListeners()
@@ -80,19 +84,29 @@ popupChangeAvatar.setEventListeners()
 
 avatarButton.addEventListener('click', function(){
   popupChangeAvatar.open();
+  formAddAvatar.toDisableButton(); 
 });
 
 function handleSubmitChangeAvatar(editObject){
   popupChangeAvatar.sendingInform(true, 'Сохранение...')
   api.changeAvatar(editObject)
-  .then(userInfo.setUserAvatar(editObject))
-  .finally(() => popupChangeAvatar.sendingInform(false))
+    .then((res) =>{
+      userInfo.setUserInfo(res)
+      popupChangeAvatar.close()
+    })
+    .catch(err => console.log(err))
+    .finally(() => {
+      popupChangeAvatar.sendingInform(false);
+    })
 }
 
 function handleSubmitDeleteCard(id){
   api.deleteCard(id)
-  cardList.getItemById(id).removeCard()
-  popupConfirmDelete.close()
+    .then(() => {
+      cardList.getItemById(id).removeCard()
+      popupConfirmDelete.close()
+    })
+    .catch(err => console.log(err))
 }
 
 const formElementEditProfileValidator = new FormValidator(classSettings, formElementEditProfile);
@@ -108,7 +122,7 @@ const cardList = new Section({
       const name = item.name;
       const link = item.link;
       const likes = item.likes;
-      return createCard({name, link, likes})
+      return createCard({name, link, likes, _id, owner})
   }  
 }, '.elements__table');
 
@@ -117,17 +131,19 @@ cardList.renderItems();
 function createCard({ name, link, likes, _id, owner }){
   const trashExist = owner._id === userInfo.getUserInfo()._id
   const usersId = userInfo.getUserInfo()._id
-  const newCard = new Card ({ name, link, likes, _id, trashExist, usersId }, handleCardClick, handleDeleteCard, (id) => {
+  const newCard = new Card ({ name, link, likes, _id, trashExist, usersId }, cardItem, handleCardClick, handleDeleteCard, (id) => {
     if(newCard.isCardLiked()){
       api.deleteLike(id)
       .then(res => {
       newCard.setLike(res.likes)
     })
+    .catch(err => console.log(err))
     } else {
       api.doLike(id)
       .then(res => {
       newCard.setLike(res.likes)
     })
+    .catch(err => console.log(err))
   }
   });
   cardList.addItem(newCard.generateCard(), newCard);

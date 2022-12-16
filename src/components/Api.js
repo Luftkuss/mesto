@@ -1,38 +1,38 @@
 export default class Api {
-    constructor({url, headers}) {
-      this._url = url,
+    constructor({baseUrl, headers}) {
+      this._url = baseUrl,
       this._headers = headers
     }
 
     getUserInformation(){
-      return fetch("https://nomoreparties.co/v1/cohort-54/users/me", {
+      console.log()
+      return fetch(`${this._url}/users/me`, {
           headers: this._headers
       })
-      .then(res => res.ok ? res.json() : Promise.reject(res.status))
-      .catch(console.log)
+      .then(this._checkResponse)
     }
 
     getCards(){
-      return fetch("https://mesto.nomoreparties.co/v1/cohort-54/cards", {
+      return fetch(`${this._url}/cards`, {
         headers: this._headers
       })
-      .then(res => res.ok ? res.json() : Promise.reject(res.status))
-      .catch(console.log)
+      .then(this._checkResponse)
     }
     
     editUserInformation(object){
-      return fetch("https://nomoreparties.co/v1/cohort-54/users/me", {
+      return fetch(`${this._url}/users/me`, {
         method: 'PATCH',
         headers: this._headers,
         body: JSON.stringify({
           name: object.name,
-          about: object.description
+          about: object.about
         })
       })
+      .then(this._checkResponse)
     }
 
     uploadCard(object){
-      return fetch("https://mesto.nomoreparties.co/v1/cohort-54/cards", {
+      return fetch(`${this._url}/cards`, {
         method: 'POST',
         headers: this._headers,
         body: JSON.stringify({
@@ -40,45 +40,48 @@ export default class Api {
           link: object.link
         })
       })
-      .then(res => res.ok ? res.json() : Promise.reject(res.status))
-      .catch(console.log)
+      .then(this._checkResponse)
     }
 
     deleteCard(id){
-      return fetch(`https://mesto.nomoreparties.co/v1/cohort-54/cards/${id}`, {
+      return fetch(`${this._url}/cards/${id}`, {
         method: 'DELETE',
         headers: this._headers,
-      }).then(res => res.ok ? res.json() : Promise.reject(res.status))
-      .catch(console.log)
+      })
+      .then(this._checkResponse)
     }
 
     doLike(id){
-      return fetch(`https://mesto.nomoreparties.co/v1/cohort-54/cards/${id}/likes`, {
+      return fetch(`${this._url}/cards/${id}/likes`, {
         method: "PUT",
         headers: this._headers
       }) 
-      .then(res => res.ok ? res.json() : Promise.reject(res.status))
-      .catch(console.log)
+      .then(this._checkResponse)
     }
 
     deleteLike(id){
-      return fetch(`https://mesto.nomoreparties.co/v1/cohort-54/cards/${id}/likes`, {
+      return fetch(`${this._url}/cards/${id}/likes`, {
         method: "DELETE",
         headers: this._headers
       }) 
-      .then(res => res.ok ? res.json() : Promise.reject(res.status))
-      .catch(console.log)
+      .then(this._checkResponse)
     }
 
     changeAvatar(object){
-      return fetch("https://mesto.nomoreparties.co/v1/cohort-54/users/me/avatar", {
+      return fetch(`${this._url}/users/me/avatar`, {
         method: "PATCH",
         headers: this._headers,
         body: JSON.stringify({
-          avatar: object.link
+          avatar: object.avatar
         })
       }) 
-      .then(res => res.ok ? res.json() : Promise.reject(res.status))
-      .catch(console.log)
+      .then(this._checkResponse)
+    }
+
+    _checkResponse(res) {
+        if (res.ok) {
+            return res.json();
+        }
+        return Promise.reject(`Ошибка ${res.status}`);
     }
   }

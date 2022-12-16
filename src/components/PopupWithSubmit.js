@@ -4,7 +4,7 @@ export default class PopupWithSubmit extends Popup {
     constructor(popupSelector, callbackSubmit){
         super(popupSelector)
         this._callbackSubmit = callbackSubmit,
-        this._popupSelector = popupSelector
+        // this._popupSelector = popupSelector
         this._id = null,
         this._card = null
         }
@@ -12,7 +12,7 @@ export default class PopupWithSubmit extends Popup {
     setEventListeners(){
         super.setEventListeners()
         
-        document.querySelector(this._popupSelector).addEventListener('submit', (evt) => {
+        this._popupElement.addEventListener('submit', (evt) => {
             evt.preventDefault();
             this._callbackSubmit(this._id)
         })
@@ -22,11 +22,8 @@ export default class PopupWithSubmit extends Popup {
         this._id = id
     }
 
-    deleteCard(card){
-        this._card = card
-    }
-
-    close(){
-        super.close()
-    }
+    // deleteCard(card){
+    //     console.log(1)
+    //     this._card = card
+    // }
 };

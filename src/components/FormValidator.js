@@ -41,10 +41,8 @@ export default class FormValidator {
   }
 
   _showInputError(inputElement){
-    console.log(inputElement.id)
     const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.add(this._inputErrorClass);
-    console.log(errorElement)
     errorElement.textContent = inputElement.validationMessage;
     errorElement.classList.add(this._errorClass);
   };
@@ -71,3 +69,4 @@ export default class FormValidator {
         })
     }
   };
+  

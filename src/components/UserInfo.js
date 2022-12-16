@@ -16,16 +16,11 @@ export default class UserInfo {
         }
     }
 
-    setUserInfo(editObject){
-        this._id = editObject._id,
-        this._avatar = editObject.avatar,
-        this._nameElement.textContent = editObject.name
-        this._descriptionElement.textContent = editObject.about || editObject.description
-        this._avatarElement.src = editObject.avatar || this._avatarElement.src
-    }
-
-    setUserAvatar(editObject) {
-        this._avatarElement.src = editObject.link
-        this._avatar = editObject.avatar
-    }
+    setUserInfo({ name, about, avatar, _id }){
+            this._id = _id,
+            this._avatar = avatar,
+            this._nameElement.textContent = name
+            this._descriptionElement.textContent = about
+            this._avatarElement.src = avatar 
+        }
 }

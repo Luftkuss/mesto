@@ -1,5 +1,5 @@
 export default class Card {
-    constructor({name, link, likes, _id, trashExist, usersId }, handleCardClick, handleDeleteCard, handleLikeCard){
+    constructor({name, link, likes, _id, trashExist, usersId }, cardItem, handleCardClick, handleDeleteCard, handleLikeCard){
         this._name = name,
         this._link = link,
         this._likes = likes,
@@ -9,14 +9,17 @@ export default class Card {
         this._handleDeleteCard = handleDeleteCard,
         this._handleLikeCard = handleLikeCard,
         this._like = null,
+        this._likesCounter = null,
         this._element = null,
         this._image = null,
-        this._trashExist = trashExist
+        this._trashExist = trashExist,
+        this._cardItem = cardItem
+        
     };
 
     _getTemplate(){
         const cardElement = document
-        .getElementById('card-item')
+        .getElementById(this._cardItem)
         .content
         .querySelector('.card')
         .cloneNode(true);
@@ -32,10 +35,8 @@ export default class Card {
           this._handleLikeCard(this._id)
         });
 
-        this._element.addEventListener('click', (e) => {
-          if (e.target.classList.contains('card__image') ) {
-            this._openCardsPopup();
-          };
+        this._image.addEventListener('click', () => {
+          this._openCardsPopup();
         });
     };
 
@@ -64,8 +65,7 @@ export default class Card {
 
     setLike(likeItems){
       this._likes = likeItems
-      const likesCounterElement = this._element.querySelector('.card__likes-counter');
-      likesCounterElement.textContent = this._likes.length
+      this._likesCounter.textContent = this._likes.length
       if(this.isCardLiked()) {
         this._likeCard()
       } else {
@@ -79,12 +79,14 @@ export default class Card {
       this._image = this._element.querySelector('.card__image')
       this._setEventListeners();
       this._element.querySelector('.card__title').textContent = this._name;
+      this._likesCounter = this._element.querySelector('.card__likes-counter')
       this._image.src = this._link;
       this._image.alt = this._name;
       this.setLike(this._likes)
       if (!this._trashExist) {
         this._element.querySelector('.card__trash').classList.toggle('card__trash-hidden')
       }
+      
       return this._element;
     };
 };

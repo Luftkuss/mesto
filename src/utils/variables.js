@@ -66,3 +66,5 @@ export const profileAvatar = document.querySelector(variables.profileAvatar);
 
 export const popupButtonAddAvatar = document.querySelector(variables.popupButtonAddAvatar);
 export const popupButtonEditProfile = document.querySelector(variables.popupButtonEditProfile);
+
+export const cardItem = 'card-item';
