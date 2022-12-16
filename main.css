@@ -55,11 +55,11 @@
 .popup__input-error_active{opacity:1}
 .popup_edit_card{background-color:rgba(0,0,0,.5)}
 .popup_edit_profile{background-color:rgba(0,0,0,.5)}
-.popup_confirm_delete-size{height:181px}
 
 .popup__button-confirm{margin-bottom:36px}
 
-.popup_edit_avatar-size{height:272px}
+.popup__content-avatar{height:272px}
+.popup__content-delete{height:181px}
 
 
 /*# sourceMappingURL=main.css.map*/
