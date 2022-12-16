@@ -14,7 +14,6 @@ export default class Card {
         this._image = null,
         this._trashExist = trashExist,
         this._cardItem = cardItem
-        
     };
 
     _getTemplate(){
@@ -27,7 +26,7 @@ export default class Card {
     };
 
     _setEventListeners(){
-        this._element.querySelector('.card__trash').addEventListener('click', () => {
+        this._trash.addEventListener('click', () => {
           this._handleDeleteCard(this._id, this._element)
         });
 
@@ -77,6 +76,7 @@ export default class Card {
       this._element = this._getTemplate();
       this._like = this._element.querySelector('.card__image-like')
       this._image = this._element.querySelector('.card__image')
+      this._trash = this._element.querySelector('.card__trash')
       this._setEventListeners();
       this._element.querySelector('.card__title').textContent = this._name;
       this._likesCounter = this._element.querySelector('.card__likes-counter')
@@ -84,7 +84,7 @@ export default class Card {
       this._image.alt = this._name;
       this.setLike(this._likes)
       if (!this._trashExist) {
-        this._element.querySelector('.card__trash').classList.toggle('card__trash-hidden')
+        this._trash.classList.toggle('card__trash-hidden')
       }
       
       return this._element;
